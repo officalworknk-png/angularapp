@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.0.0",
   "engines": {
-  "node": "16.x"
+  "node": "24.x"
   },
   "scripts": {
     "ng": "ng",
