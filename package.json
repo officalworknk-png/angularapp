@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build": "ng build playerapp --prod",
-    "adminbuild": "ng build adminap --prod"
+    "adminbuild": "ng build adminapp --prod"
   },
   "private": true,
   "dependencies": {
