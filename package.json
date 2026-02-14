@@ -4,10 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build": "ng build playerapp --prod",
+    "adminbuild": "ng build adminapp"
+
+  },
+  "engines": {
+  "node": "16.x"
   },
   "private": true,
   "dependencies": {
