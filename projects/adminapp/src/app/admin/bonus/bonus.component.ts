@@ -12,7 +12,7 @@ import { MainObjectService } from 'core/services/master-object.service';
 export class BonusComponent implements OnInit {
   bonusdata: any;
   selectedBonus:any;
-
+submitted=false
   constructor(public object: MainObjectService, public router: Router,private fb: FormBuilder) { 
     this.object.activelink="BONUS"
 
@@ -206,6 +206,10 @@ export class BonusComponent implements OnInit {
       this.object.setError(error)
 
     })
+  }
+
+  deletebonus(data){
+    
   }
 }
 

@@ -14,6 +14,7 @@ export class UserDownlineComponent implements OnInit {
   userId: any;
   userdetail: any;
   selectedUser: any;
+  submitted:false
 
   constructor(public object: MainObjectService, public router: Router,private fb: FormBuilder) {
     this.object.activelink="DOWNLINE"

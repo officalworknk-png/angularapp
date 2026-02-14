@@ -27,6 +27,8 @@ export class UpdateTournamentComponent implements OnInit {
   selectedParentMatch:any
   playerRegistertournament: any;
   loader: boolean=false;
+
+  submitted=false
   constructor(private fb: FormBuilder, public object: MainObjectService, public routeParam: ActivatedRoute, public router: Router) {
     this.object.activelink="TOURNAMENT_MGMT"
 
@@ -318,7 +320,7 @@ export class UpdateTournamentComponent implements OnInit {
     })
   }
 
-  updatematch(userId) {
+  updatematch() {
 
     if (this.matchForm.invalid) {
       return;

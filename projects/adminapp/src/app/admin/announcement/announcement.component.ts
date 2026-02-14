@@ -10,7 +10,7 @@ import { MainObjectService } from 'core/services/master-object.service';
 })
 export class AnnouncementComponent implements OnInit {
     selectedannouncement: any;
-
+submitted=false
   
     constructor(public object: MainObjectService, public router: Router,private fb: FormBuilder) { 
       this.object.activelink="ANNOUNCEMENT"
@@ -181,6 +181,10 @@ export class AnnouncementComponent implements OnInit {
         this.object.setError(error)
   
       })
+    }
+
+    deletebonus(data){
+
     }
   
   
