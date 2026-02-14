@@ -1,0 +1,41 @@
+<div class="container">
+
+    <!-- *ngIf="!this.object.isUser" -->
+    <button class="btn btn-primary col-sm-2 " (click)="openmodaladdmatch()">Add
+        match</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">match No.</th>
+                <th scope="col">Round </th>
+                <th scope="col">Status</th>
+                <th scope="col">bye</th>
+
+                <th scope="col">View data</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of this.matchdata;let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{data?.matchNo}}</td>
+                <td>{{data?.round}}</td>
+                <td>{{data?.status}}</td>
+                <td>{{data?.bye}}</td>
+
+                <!-- <td><button class="btn btn-primary col-sm-10  me-2" (click)="viewTournamet(data)">View </button></td> -->
+                <td><button class="btn btn-primary col-sm-10  me-2" (click)="showUpdatedmatchModal(data)">Update </button></td>
+                <td><button class="btn btn-primary col-sm-10  me-2" (click)="deleteTournamet(data)">delete </button></td>
+
+            </tr>
+        </tbody>
+        <h3 class=" " *ngIf="this.matchdata?.length ==0">No record Found</h3>
+    </table>
+</div>
+
+
+
+

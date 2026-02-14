@@ -1,0 +1,96 @@
+<!-- BEGIN Left Aside -->
+<aside class="page-sidebar" id="ad-sidebar">
+    <div class="page-logo">
+        <a class="page-logo-link press-scale-down d-flex align-items-center justify-content-center position-relative">
+            <img class="bigLogo" src="assets/images/PHONEPEe.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+            <img class="iconLogo" src="assets/images/PHONEPeE.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+        </a>
+    </div>
+    <div class="page-logo">
+        <a [routerLink]="[this.object.getUI_URL().admin.accountProfile]"
+            class="page-logo-link press-scale-down d-flex align-items-center justify-content-center position-relative">
+            <img src="assets/images/PHONEPe.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+
+        </a>
+    </div>
+    <!-- BEGIN PRIMARY NAVIGATION -->
+    <nav id="js-primary-nav" class="primary-nav js-list-filter" role="navigation">
+        <div class="nav-filter">
+            <div class="position-relative">
+                <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control" tabindex="0">
+                <a href="#" class="btn-primary btn-search-close js-waves-off" data-action="toggle"
+                    data-class="list-filter-active" data-target=".page-sidebar">
+                    <i class="fal fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+
+        <ul id="js-nav-menu" class="nav-menu ">
+            <!-- -------------------------------------new side menu---------------------------------------------------------- -->
+            <!-- <li class=""  routerLinkActive="active" [class.open]="rlaDb?.isActive" #rlaDb="routerLinkActive" >
+                <a data-filter-tags="account" class=" waves-effect waves-themed" aria-expanded="false"
+                    routerLinkActive="active" [routerLink]="[this.object.getUI_URL().admin.dashboard]"
+                   >
+                    <i class="fal fa-laptop-code"></i>
+                    <span class="nav-link-text whiteCR">{{'Dashboard'  | titlecase}} </span></a>
+            </li> -->
+            <ng-container *ngFor="let data of this.sidemenudata">
+                <li (click)="gotopage(data?.url)" [ngClass]="data.enum == this.object?.activelink ? 'active':'' "
+                    routerLinkActive="active" [class.open]="rlaDb?.isActive" #rlaDb="routerLinkActive">
+                    <a data-filter-tags="account" class=" waves-effect waves-themed" aria-expanded="false"
+                        routerLinkActive="active">
+                        <i class="fal fa-laptop-code"></i>
+                        <span class="nav-link-text whiteCR">{{data?.label| titlecase}} </span></a>
+
+                        <ul *ngIf="data?.enum=='PAYMENT'">
+                            <li class=""><a class=" waves-effect waves-themed"
+                                    data-filter-tags="application intel analytics dashboard"
+                                    (click)="gotopage('transaction')"><span class="nav-link-text">User Transaction</span></a>
+                            </li>
+                            <li><a class=" waves-effect waves-themed"><span
+                                (click)="gotopage('payemnt-mode')"     class="nav-link-text">Payment Mode</span></a>
+                            </li>
+                           
+                        </ul>
+
+
+                    <ul *ngIf="data?.enum=='CMS'">
+                        <li class=""><a class=" waves-effect waves-themed"
+                                data-filter-tags="application intel analytics dashboard"
+                                (click)="gotopage('annoucement-management')"><span class="nav-link-text">Announcement</span></a>
+                        </li>
+                        <li><a class=" waves-effect waves-themed"><span
+                            (click)="gotopage('banner-management')"     class="nav-link-text">Dashboard Banners</span></a>
+                        </li>
+                        <li><a class=" waves-effect waves-themed"><span
+                            (click)="gotopage('annoucement-management')"  class="nav-link-text">Alert</span></a>
+                        </li>
+                    </ul>
+
+
+                </li>
+            </ng-container>
+
+
+
+
+            <li class="" routerLinkActive="active" [class.open]="rlaAfPh?.isActive" #rlaAfPh="routerLinkActive">
+                <a routerLinkActive="active" [routerLink]="[this.object.getUI_URL().admin.affiliatePayoutHistory]"
+                    aria-expanded="false" data-filter-tags="application intel" class="waves-effect waves-themed">
+                    <i class="fal fa-money-bill-alt"></i>
+                    <span class="nav-link-text" data-i18n="nav.application_intel">{{'Payout History' |
+                        titlecase}}</span>
+                </a>
+            </li>
+
+            <!-- --------------------------------------------- End ------------------------------------------------------------ -->
+        </ul>
+        <div class="filter-message js-filter-message bg-success-600"></div>
+    </nav>
+
+</aside>
+
+<!-- THIS DIV USED FOR OVERLAY MOBILE -->
+<div>
+    <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+</div>

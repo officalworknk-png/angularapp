@@ -1,0 +1,21 @@
+h4,h5,h3{
+    color: black;
+}
+
+
+
+.btn-group2{ display: flex; align-items: center;}
+.btn-group2 .btn{  background: #acb5bc; border-color: #333; font-weight: 700;}
+.active-W{ background: red!important;}
+.active-D{ background: green!important;}
+.input-wid{width: 200px;}
+.dwGroup{display: flex;}
+.dwGroup input{display: none;}
+
+
+.sucess{
+    color: green;
+}
+.error{
+    color: red;
+}

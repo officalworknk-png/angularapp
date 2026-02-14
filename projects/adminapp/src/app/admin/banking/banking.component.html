@@ -1,0 +1,90 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+  <h2 class="titleText">{{'Banking' | titlecase}}</h2>
+  <div class="row">
+    <div class="col-xl-12">
+
+
+        <div class="">
+        <input type="text" class="form-control col-md-2" placeholder="search by user name">
+        </div>
+        <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+        aria-describedby="dt-basic-example_info" *ngIf="!this.object.isUser">
+          <thead class="btn-primary">
+            <tr role="row">
+              <th scope="col">#</th>
+              <th scope="col">User Name</th>
+              <th scope="col">User Id</th>
+              <th scope="col">Email</th>
+              <th scope="col">Number</th>
+              <th scope="col">Role</th>
+              <th scope="col">Status</th>
+              <th scope="col">Pl Bonus/ Expouser</th>
+              <!-- <th scope="col">Player Total Balance</th> -->
+              <th scope="col">Player Ava. Balance</th>
+              <th scope="col" *ngIf="this.messageresponse?.length > 0">Message</th>
+              <th scope="col">D/W</th>
+              <th scope="col">Remark</th>
+  
+              <!-- <th scope="col">Update</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of this.userdata;let i=index">
+              <th scope="row">1</th>
+              <td>{{data?.name}}</td>
+              <td>{{data?._id}}</td>
+              <td>{{data?.email}}</td>
+              <td>{{data?.number}}</td>
+              <td>{{data?.role}}</td>
+              <td [ngClass]="data?.active=='ACTIVE' ? 'sucess':'error'">{{data?.active}}</td>
+              <td>{{data?.wallet?.bonus}}/ {{data?.wallet?.exposure}}</td>
+              <!-- <td>{{data?.wallet?.totalCoin}}</td> -->
+              <td>{{data?.wallet?.availableCoins}}</td>
+              <td *ngIf="this.messageresponse?.length > 0">
+                <ng-container *ngFor="let datamessage of this.messageresponse">
+                  <ng-container *ngIf="datamessage?._id==data?._id">
+                   <span [ngClass]="datamessage?.mcode==200 ? 'sucess':'error'"> {{datamessage?.message}}</span>
+                  </ng-container> 
+                </ng-container>
+              </td>
+              <td>
+           
+               <div class="d-flex align-items-center input-wid">
+                <div class="btn-group2 btn-group-toggle dwGroup">
+                    <label for="toggle-on1_{{data?._id}}" class="btn btn-secondary btn-sm mr-1"  [ngClass]="data?.bankingOption == 0 ?  'active-D': ''">
+                    <input id="toggle-on1_{{data?._id}}"
+                        
+                        name="toggle_{{data?._id}}" value="0" [(ngModel)]="data.bankingOption" type="radio"
+                        (click)="isDepositesection(i)"
+                        >
+                    D</label>
+                    <label for="toggle-off1_{{data?._id}}" class="btn btn-secondary btn-sm" [ngClass]="data.bankingOption == 1 ?  'active-W': ''">
+                    <input id="toggle-off1_{{data?._id}}"
+                        
+                        name="toggle_{{data?._id}}" value="1" [(ngModel)]="data.bankingOption" type="radio"
+                        (click)="isWidthrawsection(i)"
+                        >
+  
+                    W</label>
+                </div>
+                <div class="col-12"><input type="number" [disabled]="!(data.bankingOption)" class="form-control mx-2" placeholder="enter amount" [(ngModel)]="data.amount"></div>
+  
+                </div>
+              </td>
+              <td> <input type="text" class="form-control" placeholder="remark" [(ngModel)]="data.remark">
+              </td>
+  
+            </tr>
+            
+  
+          </tbody>
+          
+          <h3 class=" " *ngIf="this.userdata?.length ==0">No record Found</h3>
+        </table>
+      <div class="col-12  mt-2 d-flex justify-content-end">
+        <button class="btn btn-primary mr-2" (click)="submitbankingDetail()">Update </button>
+        <button class="btn btn-primary" (click)="clearbankingDetail()">Clear All Changes</button>
+      </div>
+    </div>
+  </div>
+  </main>

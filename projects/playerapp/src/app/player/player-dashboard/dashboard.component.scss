@@ -1,0 +1,32 @@
+.accordion-item-2 {
+    background-color: #1b1b1c;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding: 24px 30px 14px;
+    box-shadow: 0 3px 7px rgb(0 0 0 / 3%);
+}
+
+.accordion-wrapper {
+    margin-top: 50px;
+}
+.accordion-item-trigger {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.accordion-header .accordion-button{
+    background-color: #1b1b1c;
+    font-size: smaller;
+    color: #fff;
+}
+
+.accordion-body{
+    background-color: #1b1b1c;
+
+    color: #fff;
+}
+.accordion-button:focus{
+    background-color: #1b1b1c !important;
+
+}

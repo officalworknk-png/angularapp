@@ -1,0 +1,22 @@
+<div id="toast-container" class="toast app-error hide toast-top-right" aria-hidden="true">
+  <div class="toast toast-error mb-0" aria-live="assertive">
+     <!-- <div class="toast-progress"></div> -->
+     <button type="button" class="toast-close-button" role="button"
+        (click)="this.object.getDOMInstance().close().error()">×</button>
+     <span class="error-msg msga"></span>
+  </div>
+</div>
+<div id="toast-container" class="toast app-success hide toast-top-right" aria-hidden="true">
+  <div class="toast toast-success mb-0" aria-live="polite">
+     <!-- <div class="toast-progress" style="width: 50.9%;"></div> -->
+     <button type="button" class="toast-close-button" role="button"
+        (click)="this.object.getDOMInstance().close().success()">×</button>
+     <div class="success-msg msga"></div>
+  </div>
+</div>
+<div class="toast app-warning hide mb-0" aria-hidden="true">
+  <i class="fa fa-check iocinewrn" aria-hidden="true"></i>
+  <span class="warning-msg msga"></span>
+  <span class="close tosclose" aria-role="button" tabindex="0"
+     (click)="this.object.getDOMInstance().close().warning()">&times;</span>
+</div>

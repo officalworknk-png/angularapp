@@ -1,0 +1,330 @@
+<section class="gallery_part section_padding bg-light">
+    <div class="bannerRow">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 text-center text-md-left mb-3 mb-sm-0">
+                    <img src="assets/img/{{this.tournamentdata?.gameType}}.jpg" style="border-radius:15px ;" alt="image">
+                </div>
+                <div class="col-sm-5 text-center text-md-left mb-3 mb-sm-0">
+                    <h3>{{this.tournamentdata?.settings?.fulltnmentName}}</h3>
+                    <h5>Entry Charges:  {{this.tournamentdata?.entrycharges }}</h5>
+                    <h5>Prize Pool:  {{this.tournamentdata?.prize }}</h5>
+                    <h6>until {{this.tournamentdata?.sechduleEnddate | date}}</h6>
+
+                </div>
+                <div class="col-sm-4 p-4 regCol">
+                    <h5 class="d-flex justify-content-between" *ngIf="this.tournamentdata?.settings?.regEnable">
+                        <strong>Registration open Now</strong> <span class="register-teamno">{{this.tournamentdata?.registerTeam.length}}</span>
+                    </h5>
+                    <h5 class="d-flex justify-content-between" *ngIf="!this.tournamentdata?.settings?.regEnable">
+                        <strong>Registration close Now</strong> <span style="width: 50px; text-align:center">{{this.tournamentdata?.registerTeam.length}}</span>
+                    </h5>
+
+                    <h6 class="d-flex justify-content-between"><strong>Until {{this.tournamentdata?.sechduleEnddate |
+                            date}}</strong>
+                        <span class="border-top" style="width: 50px; text-align:center">{{this.tournamentdata?.maxParticipentTeam}}
+                            {{this.tournamentdata?.participantType}} </span>
+                    </h6>
+                    <button *ngIf="this.tournamentdata?.settings?.regEnable && !playerRegisterdetail" (click)="registerTournamentcheck()" class="button mt-4 text-white w-100 btn_1 register_btn"
+                        type="submit">Register Tournament</button>
+                    <button *ngIf="this.object.isUser && playerRegisterdetail?.registrationStatus" (click)="registerTournamentcheck()" class="button  text-white w-100 btn_1 register_btn mt-4"
+                        type="submit">View My Registestration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar tnamnet-navbar">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                        type="button" role="tab" aria-controls="home" aria-selected="true">Tournament Info</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="matchinfo-tab" data-bs-toggle="tab" data-bs-target="#matchinfo"
+                        type="button" role="tab" aria-controls="profile" aria-selected="false">Match</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="streaminfo-tab" data-bs-toggle="tab" data-bs-target="#streaminfo"
+                        type="button" role="tab" aria-controls="contact" aria-selected="false">Stream</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="result-tab" data-bs-toggle="tab" data-bs-target="#trnamentregister" type="button"
+                        role="tab" aria-controls="result" aria-selected="false">Tournament Register Team</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="result-tab" data-bs-toggle="tab" data-bs-target="#result" type="button"
+                        role="tab" aria-controls="result" aria-selected="false">Tournament Result</button>
+                </li>
+     
+            </ul>
+        </div>
+    </div>
+    <div class="container navbar-containt">
+        <div class="row">
+            <!----------Table Date------------------------------->
+            <div class="tab-content" id="myTabContent">
+
+                <!----------Tournament Info------------------------------->
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="row  mt-3">
+                        <div class="col-sm-6 mt-3">
+                           <span class="fs-6"> <strong>Description:</strong></span>
+                            {{this.tournamentdata?.settings?.tnmentdescription}}
+                        </div>
+                        <div class="col-sm-6 mt-3">
+                            <span class="fs-6"><strong>Prize:</strong></span>
+                            {{this.tournamentdata?.settings?.tnmentPrize}}
+
+                        </div>
+                        <div class="col-sm-6 mt-3">
+                            <span class="fs-6"><strong>Rules:</strong></span>
+                            {{this.tournamentdata?.settings?.tnmentRules}}
+
+                        </div>
+                        <div class="col-sm-5 col-md-4 mt-3">
+                            <span class="fs-6"><strong>Contact Detail:</strong></span>
+                            {{this.tournamentdata?.settings?.contactEmail}}
+
+                        </div>
+                    </div>
+                </div>
+
+                <!----------Match Info------------------------------->
+                <div class="tab-pane fade" id="matchinfo" role="tabpanel" aria-labelledby="matchinfo-tab">
+                    <table class="table mt-4" >
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Match</th>
+                                <th scope="col">Round</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let matchall of this.matchdata">
+                            <tr *ngFor="let match of matchall?.allMatches;let i =index">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{match?.matchNo}}</td>
+                                <td>{{match?.round}}</td>
+                                <td>{{matchall?.createdAt | date}}</td>
+                            </tr>
+                        </ng-container>
+                           
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <!----------Stram Info------------------------------->
+                <div class="tab-pane fade" id="streaminfo" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="row  mt-3">
+                        <div class="col-sm-6 mt-3">
+                            <span class="fs-6"><strong>Stream URL:</strong></span>
+                            {{this.tournamentdata?.settings?.streamUrl || 'N/A'}}
+                        </div>
+                        <div class="col-sm-6 mt-3">
+                            <span  class="fs-6"><strong>Stream Profile:</strong></span>
+                            {{this.tournamentdata?.settings?.streamPlateform || 'N/A'}}
+
+                        </div>
+                    </div>
+                </div>
+
+                  <!----------Register Team info------------------------------->
+                  <div class="tab-pane fade" id="trnamentregister" role="tabpanel" aria-labelledby="matchinfo-tab">
+                    <table class="table mt-4" >
+                        <thead class="btn-primary">
+                            <tr role="row">
+                                <th scope="col">#</th>
+                                <th scope="col">Team Name</th>
+                                <th scope="col">Region</th>
+                                <th scope="col">Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="this.tournamentdata?.registerTeam?.length > 0">
+                            <tr *ngFor="let registerteam of this.tournamentdata?.registerTeam;let i =index">
+                                <td>{{i+1}}<td>
+                                <td>{{registerteam?.teamName}}</td>
+                                <td>{{registerteam?.region}}</td>
+                                <td>{{registerteam?.rating}}</td>
+                            </tr>
+                            <h6 style="color: #000;align-items: center;" *ngIf="!this.object.isLogin">Please Login To view Team Detail</h6>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!----------Result Info------------------------------->
+                <div class="tab-pane fade" id="result" role="tabpanel" aria-labelledby="result-tab">
+                    <div class="row mt-2">
+                        <span class="text-center"><strong>Match Result</strong></span>
+    
+                        <div class="container  pt-4 pb-4">
+                            <div class="row">
+                                <div id="accordion">
+                                    <ng-container  *ngFor="let allmatchdata of this.matchdata;">
+                                    <div class="card" *ngFor="let match of allmatchdata?.allMatches;let i=index">
+
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" style="color: #000;"  data-toggle="collapse"
+                                                    [attr.data-target]="'#collapseOne'+i" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                   <span class="fs-6" class="mr-2"> #{{i+1}} Match {{match?.matchNo}}</span> 
+                                                </button>
+                                            </h5>
+                                        </div>
+    
+                                        <div [id]="'collapseOne'+i" class="collapse " aria-labelledby="headingOne"
+                                            data-parent="#accordion">
+                                            <div class="card-body p-2">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Team Name </th>
+                                                            <!-- <th scope="col">ForFeit(not able to jion)</th> -->
+                                                            <th scope="col">In Game Rank</th>
+                                                            <th scope="col">KillS</th>
+                                                            <th scope="col">Score</th>
+                                                            <th scope="col">Rank</th>
+                                                            <th scope="col">Img</th>
+    
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let data of match?.teams;let i=index">
+                                                            <th scope="row">{{i+1}}</th>
+                                                            <td>{{data?.name}}</td>
+                                                            <!-- <td>{{data?.forFeit ? 'Not Able to Join' :''}}</td> -->
+                                                            <td>{{data?.gameRank}} </td>
+                                                            <td>{{data?.kills}}</td>
+                                                            <td>{{data?.score}} </td>
+                                                            <td>{{data?.rank}} </td>
+                                                            <td *ngIf="data?.rank==1"> <img src="assets/img/1winner.jpg" width="60" alt="random image"> </td>
+                                                            <td *ngIf="data?.rank==2"> <img src="assets/img/2winner.jpg"  width="60" alt="random image"> </td>
+                                                            <td *ngIf="data?.rank==3"> <img src="assets/img/3winner.jpg"  width="60" alt="random image"> </td>
+    
+    
+                                                        </tr>
+                                                    </tbody>
+                                                    <h3 *ngIf="match?.matchresult?.length ==0">No Result Found</h3>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                      </ng-container>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+
+
+                
+                <!----------End Result Section------------------------------->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Register Tournament Modal-->
+
+<div class="modal fade" id="register-tournament" tabindex="-1">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register Tournament</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="container">
+                <div class="row ">
+                    <h4 *ngIf="playerRegisterdetail?.registrationStatus" class="text-center p-2 bg-dark ">You have
+                        already register on this tournament </h4>
+                   
+                     
+
+                    <div class="col-lg-12 p-3">
+                        <ul>
+                            <li class="d-flex justify-content-between mb-2">Registration Status:
+                                <span [ngClass]="playerRegisterdetail?.registrationStatus=='APPROVE' ? 'bg-success' :
+                                playerRegisterdetail?.registrationStatus=='REJECT' ? 'bg-danger' :
+                                (playerRegisterdetail?.registrationStatus=='CANCEL_SELF' || playerRegisterdetail?.registrationStatus=='CANCEL_ADMIN') ? 'bg-danger' :
+                                playerRegisterdetail?.registrationStatus=='PENDING' ? 'bg-info':''">{{playerRegisterdetail?.registrationStatus}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Registration Remark:
+                                <span *ngIf="playerRegisterdetail?.registrationStatus=='PENDING'"> Wait for Confirmation admin
+                                    will contact you </span>
+
+                                    <span *ngIf="playerRegisterdetail?.registrationStatus=='APPROVE' 
+                                    ||playerRegisterdetail?.registrationStatus=='REJECT' || playerRegisterdetail?.registrationStatus=='CANCEL_ADMIN'
+                                    ||playerRegisterdetail?.registrationStatus=='CANCEL_SELF'">
+                                   {{playerRegisterdetail?.remark || '-'}} </span>  
+                            </li>
+                           
+                            <li class="d-flex justify-content-between mb-2">Entry Charge:
+                                      <span  *ngIf="this.tournamentdata?.entrycharges ==0"> <strong>Free</strong></span>
+                                    <span  *ngIf="this.tournamentdata?.entrycharges > 0"><strong> &#8377; {{this.tournamentdata?.entrycharges}}</strong></span>
+                            </li>
+
+                            <li class="d-flex justify-content-between mb-2">Team Name:
+                                <span>{{teamUsertdata?.teamName}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Team Leader:
+                                <span>{{teamUsertdata?.teamName}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Region
+                                :<span>{{teamUsertdata?.region}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Whatsup No
+                                :<span>{{teamUsertdata?.whatsupno}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Email
+                                :<span>{{teamUsertdata?.email}}</span>
+                            </li>
+
+                        </ul>
+
+                        <table class="table mt-3" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Player Name</th>
+                                    <th scope="col">Discord UserName</th>
+
+                                    <th scope="col">UID</th>
+                                    <th scope="col">Player Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let playerdetail  of this.teamUsertdata?.players;let i = index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{playerdetail?.playerName}}</td>
+                                    <td>{{playerdetail?.discordUserName}}</td>
+                                    <td>{{playerdetail?.uid}}</td>
+                                    <td>{{playerdetail?.active}}</td>
+
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                  
+
+                    <div class="button-group-area m-4 d-flex">
+                        <a *ngIf="!playerRegisterdetail?.registrationStatus" (click)="finalregistertournament()"
+                            class="genric-btn success large  register_btn btn_1">Register Now</a>
+                        <a (click)="cancelregistertournament()"
+                            *ngIf="playerRegisterdetail?.registrationStatus=='PENDING'"
+                            class="genric-btn primary e-large  ">Cancel Registration</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

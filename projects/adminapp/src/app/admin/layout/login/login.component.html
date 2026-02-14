@@ -1,0 +1,42 @@
+
+    <div class="loginbg  flex-1">
+      <div class="container">
+        <div class="row align-items-center justify-content-center vh-100">
+         
+          <div class="col-md-6  col-lg-4">
+            <div class="card bg-primary p-5">
+            <h2 class="text-center  text-white">Login</h2>
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" >
+              <div class="mb-4 col-sm-12 form-floating">
+                <div class="input-group-prepend"></div>
+                <input class="form-control" id="floatingInput" type="text" formControlName="email"
+                  placeholder="Enter Username" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                <div *ngIf="submitted && f['email'].errors" class="validation-message">
+                  <div *ngIf="f['email'].errors['required']">User is required</div>
+                </div>
+               
+              </div>
+             
+              <div class="mb-4 col-sm-12 form-floating">
+                <div class="input-group-prepend"></div>
+                <input class="form-control" id="floatingInput" type="text" formControlName="password"
+                  placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                <!-- <label class="" for="floatingInput"><i class="fa fa-lock  me-2" aria-hidden="true"></i> Password</label> -->
+
+                <div *ngIf="submitted && f['password'].errors" class="validation-message">
+                  <div *ngIf="f['password'].errors['required']">Password is required</div>
+                </div>
+              </div>
+              <button class="btn btn-success waves-effect waves-themed" type="submit">Submit</button>
+            </form>
+
+          
+          </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+
+  <app-loader *ngIf="this.loader"></app-loader>

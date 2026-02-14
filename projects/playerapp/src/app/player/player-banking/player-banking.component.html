@@ -1,0 +1,127 @@
+<section class="contact-section section_padding">
+    <div class="container bannerRow tnamnet-navbar">
+      <div class="row">
+        <form  class="form-contact contact_form" id="contactForm" novalidate="novalidate">
+          <div class="container">
+            <div class="col-md-12 p-5">
+
+              <ul class="nav nav-tabs " id="myTab" role="tablist">
+                <li (click)="storeTab('home')" class="nav-item" role="presentation">
+                    <button class="nav-link active" id="Deposit-tab" data-toggle="tab" data-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">
+                        <h4>Deposit Coin</h4>
+                    </button>
+                </li>
+                <li (click)="storeTab('withdraw')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="withdraw-tab" data-toggle="tab" data-target="#withdraw" type="button"
+                        role="tab" aria-controls="withdraw" aria-selected="false">
+                        <h4>Withdraw Coin</h4>
+                    </button>
+                </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+
+                  <!--------------------------Basic Toutnament Info ------------------------------------>
+                  <div class="tab-pane fade show active p-2" id="home" role="tabpanel" aria-labelledby="Deposit-tab">
+                    <form [formGroup]="depositForm">
+                      <h4 class="contact-title text-black">Deposit Detail</h4>
+        
+                      <div class="mb-3">
+                        <label class="form-label" for="last-name">Enter Amount </label>
+                        <input class="form-control" id="last-name" type="number" formControlName="amount"
+                          [ngClass]="{ 'is-invalid': submitted && f['amount'].errors }" >
+                        <div *ngIf="submitted && f['amount'].errors" class="invalid-feedback">
+                          <div *ngIf="f['amount'].errors['required']">Amount is required</div>
+                        </div>
+                        <app-validation-message [control]="depositForm.controls.amount" [key]="'Amount'">
+                      </app-validation-message>
+                      </div>
+      
+                      <div class="mb-3">
+                          <label class="form-label" for="last-name">Account Holder Bank Name: </label>
+                          <input class="form-control" id="last-name" type="text" formControlName="bnkHolderName"
+                            [ngClass]="{ 'is-invalid': submitted && f['bnkHolderName'].errors }" >
+                          <app-validation-message [control]="depositForm.controls.bnkHolderName" [key]="'Transaction'">
+                          </app-validation-message>
+                      </div>
+        
+                      <div class="mb-3">
+                        <label class="form-label" for="last-name">Transaction Number: </label>
+                        <input class="form-control" id="last-name" type="text" formControlName="transactionNumber"
+                          [ngClass]="{ 'is-invalid': submitted && f['transactionNumber'].errors }" >
+                        <app-validation-message [control]="depositForm.controls.transactionNumber" [key]="'Transaction'">
+                        </app-validation-message>
+                      </div>
+      
+                      
+        
+                 
+                      <div class="form-group mt-3">
+                        <button type="submit" (click)="submitDeposit()" class="button-contactForm btn_1">Deposit Request
+                        </button>
+                      </div>
+        
+                    </form> 
+                  </div>  
+
+                  <div class="tab-pane fade show  p-2" id="withdraw" role="tabpanel" aria-labelledby="withdraw-tab">
+                    <form [formGroup]="withdrawForm">
+                      <h4 class="contact-title text-black">Withdraw Detail</h4>
+        
+                      <div class="mb-3">
+                        <label class="form-label" for="last-name">Enter Amount </label>
+                        <input class="form-control" id="last-name" type="number" formControlName="amount"
+                          [ngClass]="{ 'is-invalid': submitted && f['amount'].errors }" >
+                        <div *ngIf="submitted && f['amount'].errors" class="invalid-feedback">
+                          <div *ngIf="f['amount'].errors['required']">Amount is required</div>
+                        </div>
+                        <app-validation-message [control]="withdrawForm.controls.amount" [key]="'Amount'">
+                      </app-validation-message>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="last-name">Bank Name: </label>
+                        <input class="form-control" id="last-name" type="text" formControlName="bnkName"
+                          [ngClass]="{ 'is-invalid': submitted && f['bnkHolderName'].errors }" >
+                        <app-validation-message [control]="withdrawForm.controls.bnkName" [key]="'Bank Name'">
+                        </app-validation-message>
+                    </div>
+
+                      <div class="mb-3">
+                        <label class="form-label" for="last-name">Account Number: </label>
+                        <input class="form-control" id="last-name" type="text" formControlName="accNumber"
+                          [ngClass]="{ 'is-invalid': submitted && f['accNumber'].errors }" >
+                        <app-validation-message [control]="withdrawForm.controls.accNumber" [key]="'Account Number'">
+                        </app-validation-message>
+                      </div>
+                      <div class="mb-3">
+                          <label class="form-label" for="last-name">Account Holder Name: </label>
+                          <input class="form-control" id="last-name" type="text" formControlName="bnkHolderName"
+                            [ngClass]="{ 'is-invalid': submitted && f['bnkHolderName'].errors }" >
+                          <app-validation-message [control]="withdrawForm.controls.bnkHolderName" [key]="'Transaction'">
+                          </app-validation-message>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="last-name">Ifsc/swift code: </label>
+                        <input class="form-control" id="last-name" type="text" formControlName="ifscCode"
+                          [ngClass]="{ 'is-invalid': submitted && f['bnkHolderName'].errors }" >
+                        <app-validation-message [control]="withdrawForm.controls.IfscCode" [key]="'Ifsc/swift code'">
+                        </app-validation-message>
+                     </div>
+                  
+                      <div class="form-group mt-3">
+                        <button type="submit" (click)="submitWithdrawal()" class="button-contactForm btn_1">Withdrawal Request
+                        </button>
+                      </div>
+        
+                    </form> 
+                  </div> 
+            
+                  </div>
+               </div>
+          </div>
+  
+        </form>
+      </div>
+    </div>
+  </section>

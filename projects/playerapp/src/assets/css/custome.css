@@ -1,0 +1,66 @@
+.modal-header {
+  background-color: #ff0000 !important
+}
+
+header {
+  background: #000;
+}
+
+.main_menu .main-menu-item ul li .nav-link {
+  cursor: pointer;
+}
+
+h4,
+h5,
+h6,
+h3 {
+  margin: 0 0 0.5rem 0;
+  /* color: #c1c1c1; */
+}
+
+.bannerRow {
+  background: #0b0d18;
+  padding: 120px 0 30px;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.regCol {
+  background: #0b0d18;
+  border-radius: 10px;
+}
+
+@media(max-width:767px) {
+  .bannerRow {
+    padding: 20px 0;
+  }
+}
+
+.tnamnet-navbar {
+  background: #c8c8c8;
+}
+
+.tnamnet-navbar .nav-link {
+
+  color: #000;
+
+}
+
+
+.tnamnet-navbar .nav-tabs {
+  border: none;
+}
+
+ .navbar-containt {
+  min-height: 52vh;
+}
+
+#sidebar ul li{
+  cursor: pointer;
+}
+
+#sidebar ul li a:hover{
+  background-color:#2847cc !important;
+  color:#fff;
+}

@@ -1,0 +1,203 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+    <h2 class="titleText">{{'Tournament' | titlecase}}</h2>
+    <div class="row">
+      <div class="col-xl-12">
+
+    <!-- *ngIf="!this.object.isUser" -->
+    <button class="btn btn-primary   mb-2" (click)="openmodaladdtournament()">Add
+        Tournament</button>
+    <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+    aria-describedby="dt-basic-example_info">
+        <thead class="btn-primary">
+            <tr role="row">
+                <th scope="col">#</th>
+                <th scope="col">Tournament Name</th>
+                <th scope="col">Max Team </th>
+                <th scope="col">Status</th>
+                <th scope="col">Prize</th>
+
+                <th scope="col">Game Type</th>
+                <th scope="col">Tournamet Format</th>
+                <th scope="col">View data</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of this.tournamentdata;let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{data?.name}}</td>
+                <td>{{data?.maxParticipentTeam}}</td>
+                <td>{{data?.prize}}</td>
+
+                <td>{{data?.status}}</td>
+                <td>{{data?.gameType}}</td>
+                <td>{{data?.tournametformat}}</td>
+
+                <td><button class="btn btn-primary col-sm-10  me-2" (click)="viewTournamet(data)">View </button></td>
+                <td><button class="btn btn-primary col-sm-10  me-2" (click)="showUpdatedTournamentModal(data)">Update </button></td>
+                <td><button class="btn btn-primary col-sm-10  me-2" (click)="deleteTournamet(data)">delete </button></td>
+
+            </tr>
+        </tbody>
+        <h3 class=" " *ngIf="this.tournamentdata?.length ==0">No record Found</h3>
+    </table>
+
+    </div>
+</div>
+</main>
+
+
+<!-- <app-add-tournament></app-add-tournament> -->
+
+<div class="modal fade" id="add-tournament" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 *ngIf="!this.selectedTournamntData"class="modal-title">Add Tournament</h5>
+                <h5 *ngIf="this.selectedTournamntData" class="modal-title">Update Tournament</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                  </button>
+            </div>
+                <div class="container">
+                    <form [formGroup]="tournamentForm">
+                        <div class="row p-2">
+
+                            <!-- <div class="mb-3">
+                                <label class="form-label" for="last-name">Tournament Image: </label>
+                                <input class="form-control" id="last-name" type="text" formControlName="tunmntname"
+                                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+
+                                <app-validation-message [control]="tournamentForm.controls.tunmntname" [key]="'Tournament Name'">
+                                </app-validation-message>
+                            </div> -->
+                            <div class="col-md-6 ">
+                                <label class="form-label" for="last-name">Tournament Name: </label>
+                                <input class="form-control" id="last-name" type="text" formControlName="tunmntname"
+                                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+
+                                <app-validation-message [control]="tournamentForm.controls.tunmntname" [key]="'Tournament Name'">
+                                </app-validation-message>
+                            </div>
+                           
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="last-name">Max Participent: </label>
+                                <input class="form-control" id="last-name" type="number" formControlName="maxParticipentTeam"
+                                    [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+                                    <app-validation-message [control]="tournamentForm.controls.maxParticipentTeam" [key]="'Max Team'">
+                                    </app-validation-message>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="last-name">Participant Type: </label>
+                                <select class="form-select" formControlName="participantType">
+                                  <option value="SOLO">SOLO</option>
+                                  <option value="TEAM">TEAM </option>
+                                </select>
+                              </div>
+                              <app-validation-message [control]="tournamentForm.controls.status"
+                              [key]="'Status'"></app-validation-message>
+                            
+                              <div class="col-md-6 mb-3 ">
+                                <label class="form-label" for="last-name">Entry Charges: </label>
+                                <input class="form-control" id="last-name" type="number" formControlName="entrycharges"
+                                    [ngClass]="{ 'is-invalid': submitted && f['entrycharges'].errors }">
+                                    <app-validation-message [control]="tournamentForm.controls.entrycharges" [key]="'Entry Charges'">
+                                    </app-validation-message>
+                               
+                            </div>
+                            <div class="col-md-6 mb-3 ">
+                                <label class="form-label" for="last-name">Prize: </label>
+                                <input class="form-control" id="last-name" type="number" formControlName="prize"
+                                    [ngClass]="{ 'is-invalid': submitted && f['prize'].errors }">
+                                    <app-validation-message [control]="tournamentForm.controls.prize" [key]="'Prize'">
+                                    </app-validation-message>
+                               
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="sechduleStartdate">Start Date: </label>
+                                <input class="form-control" id="sechduleStartdate" type="date" formControlName="sechduleStartdate"
+                                    [ngClass]="{ 'is-invalid': submitted && f['sechduleStartdate'].errors }">
+                                    <app-validation-message [control]="tournamentForm.controls.sechduleStartdate" [key]="'Date'">
+                                    </app-validation-message>
+                               
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="sechduleEnddate">End Date: </label>
+                                <input class="form-control" id="sechduleEnddate" type="date" formControlName="sechduleEnddate"
+                                    [ngClass]="{ 'is-invalid': submitted && f['sechduleEnddate'].errors }">
+                                    <app-validation-message [control]="tournamentForm.controls.sechduleEnddate" [key]="'Date'">
+                                    </app-validation-message>
+                               
+                            </div>
+
+                            <div class=" col-md-6 mb-3">
+                                <label class="form-label" for="last-name">Game Type: </label>
+                                <select class="form-select" formControlName="gameType">
+                                  <option value="PUBG">PUBG</option>
+                                  <option value="COD">COD </option>
+                                  <option value="CS">CS </option>
+
+                                </select>
+                              </div>
+                              <app-validation-message [control]="tournamentForm.controls.status"
+                              [key]="'Status'"></app-validation-message>
+                              
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="last-name">Status: </label>
+                                <select class="form-select" formControlName="status">
+                                  <option value="INACTIVE">INACTIVE</option>
+                                  <option value="ACTIVE">ACTIVE </option>
+                                </select>
+                              </div>
+                              <app-validation-message [control]="tournamentForm.controls.status"
+                              [key]="'Status'"></app-validation-message>
+                       
+                            
+                       
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label" for="last-name">Tournamet Status: </label>
+                                <select class="form-select" formControlName="showstatus">
+                                  <option value="LIVE">LIVE</option>
+                                  <option value="UPCOMING">UPCOMING </option>
+                                  <option value="COMPLETED">COMPLETED </option>
+                                  <option value="CANCEL">CANCEL </option>
+
+                                </select>
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label" for="last-name">Tournamet Format: </label>
+                                <select class="form-select" formControlName="tournametformat">
+                                  <option value="SINGLE_MATCH">SINGLE_MATCH</option>
+
+                                  <option value="SINGLE_ELIMINATION">SINGLE_ELIMINATION</option>
+                                  <option value="DOUBLE_ELIMINATION">DOUBLE_ELIMINATION </option>
+                                  <option value="ROUND_ROBIN">ROUND_ROBIN </option>
+                                  <option value="SWISS">SWISS </option>
+                                  <option value="DOUBLE_ROUND_ROBIN">DOUBLE_ROUND_ROBIN </option>
+                                  <option value="STEPLADDER">STEPLADDER </option>
+
+
+                                </select>
+                              </div>
+                              <app-validation-message [control]="tournamentForm.controls.status"
+                              [key]="'Status'"></app-validation-message>
+                           
+
+                                </div>
+                                <button  *ngIf="!this.selectedTournamntData" (click)="onAddtournament()" class="btn btn-primary  m-2  p-2"
+                                type="submit">Submit</button>
+
+                                <button *ngIf="this.selectedTournamntData" (click)="updatetounament()" class="btn btn-primary m-2 p-2"
+                                type="submit">Update</button>
+                        </form>
+
+            </div>
+        </div>
+    </div>
+</div>

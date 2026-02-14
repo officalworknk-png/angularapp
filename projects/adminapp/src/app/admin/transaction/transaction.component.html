@@ -1,0 +1,93 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+    <h2 class="titleText">{{'Transaction' | titlecase}}</h2>
+    <div class="row">
+      <div class="col-xl-12">
+        <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+        aria-describedby="dt-basic-example_info">
+        <thead class="btn-primary">
+            <tr role="row">
+                <th scope="col">#</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">User Status</th>
+                <th scope="col">Transaction Type</th>
+                <th scope="col">Bonus</th>
+                <th scope="col">Previous Coin</th>
+                <th scope="col">Available Coins</th>
+                <th scope="col">Exposure</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of this.transationData;let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{data?.name}}</td>
+                <td>{{data?.phoneNumber}}</td>
+                <td>{{data?.active}}</td>
+                <td>{{data?.transactionType}}</td>
+                <td>{{data?.wallet?.bonus}}</td>
+                <td>{{data?.wallet?.previousCoin}}</td>
+                <td>{{data?.wallet?.availableCoins}}</td>
+                <td>{{data?.wallet?.exposure}}</td>
+                <td>{{data?.wallet?.amount}}</td>
+                <td><button class="btn" [ngClass]="data?.status == 'COMPLETED' ? 'bg-success':
+                    data?.status == 'FAILED' ? 'bg-danger':'bg-warning'">{{data?.status}}</button></td>
+                <td>{{data?.createdAt | date}}</td>
+
+                <td>
+                  <!-- <button class="btn btn-primary  mr-2" (click)="viewtournamentDetail(data)">View </button> -->
+                    <button class="btn btn-primary  mr-2" (click)="updatemodal(data)">Update </button>  
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+      </div>
+    </div>
+  </main>
+  
+  
+  <!-------------ADD/Update bonus------------------>
+  <div class="modal fade" id="update-transation" tabindex="-1">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="this.selectedBonus" class="modal-title">Update Transation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+          </button>
+          </div>
+         
+        <div class="container">
+          
+          <div class="col-md-10 m-2">
+            <div class="m-2">
+            <label class="form-label" for="last-name">Status: </label>
+            <select class="form-select" [(ngModel)]="status">
+              <option value="COMPLETED">COMPLETED</option>
+              <option value="FAILED">FAILED</option>
+            </select>
+          </div>
+
+          <div class="m-2">
+
+          <input placeholder="Remark" [(ngModel)]="remark">
+          </div>
+            <div class="m-2">
+          <button  (click)="updateStatusbanking()" class="btn btn-primary"
+          type="submit">Update Status</button>
+            </div>
+
+        </div>
+
+        </div>
+       
+  
+      </div>
+    </div>
+  </div>

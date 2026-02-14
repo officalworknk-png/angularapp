@@ -1,0 +1,979 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+    <h2 class="titleText">{{'Tournament Info' | titlecase}}</h2>
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- nav-fill -->
+            <ul class="nav nav-tabs " id="myTab" role="tablist">
+                <li (click)="storeTab('home')" class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">
+                        <h4>Tournament Info</h4>
+                    </button>
+                </li>
+                <li (click)="storeTab('match')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="match-tab" data-toggle="tab" data-target="#match" type="button"
+                        role="tab" aria-controls="match" aria-selected="false">
+                        <h4>Match</h4>
+                    </button>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
+                <button class="nav-link" id="registrationsetting-tab" data-toggle="tab" data-target="#registrationsetting"
+                    type="button" role="tab" aria-controls="registration" aria-selected="false">Player
+                    Registration Configuration</button>
+            </li> -->
+                <li (click)="storeTab('registration')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="registration-tab" data-toggle="tab" data-target="#registration"
+                        type="button" role="tab" aria-controls="registration" aria-selected="false">
+                        <h4>Player
+                            Registration</h4>
+                    </button>
+                </li>
+
+                <li (click)="[storeTab('structure')]" class="nav-item" role="presentation">
+                    <button class="nav-link" id="result-tab" data-toggle="tab" data-target="#result" type="button"
+                        role="tab" aria-controls="result" aria-selected="false">
+                        <h4>Set Player Result</h4>
+                    </button>
+                </li>
+                <li (click)="storeTab('winnerresult')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="match-winner" data-toggle="tab" data-target="#winnerresult" type="button"
+                        role="tab" aria-controls="result" aria-selected="false">
+                        <h4>Match Winner Result</h4>
+                    </button>
+                </li>
+                <li (click)="storeTab('playerbanking')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="match-winner" data-toggle="tab" data-target="#playerbanking" type="button"
+                        role="tab" aria-controls="result" aria-selected="false">
+                        <h4>Register Player Banking</h4>
+                    </button>
+                </li>
+            </ul>
+
+
+            <!----------------------------Table Details -->
+            <div class="tab-content" id="myTabContent">
+
+                <!--------------------------Basic Toutnament Info ------------------------------------>
+                <div class="tab-pane fade show active p-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div >
+                        <div class="col-lg-4 ">
+                            <ul>
+                                <h4>Basic Details</h4>
+                                <li class="d-flex justify-content-between mb-2">Tournament Name:
+                                    <span>{{tournamentdata?.name}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Max
+                                    {{tournamentdata?.participantType}}:<span>{{tournamentdata?.maxParticipentTeam}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">
+                                    Prize:<span>{{tournamentdata?.prize}}</span>
+                                </li>
+
+                                <li class="d-flex justify-content-between mb-2">Game Type:
+                                    <span>{{tournamentdata?.gameType}}</span>
+                                </li>
+
+                                <li class="d-flex justify-content-between mb-2">Start Date:
+                                    <span>{{tournamentdata?.sechduleStartdate}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">End Date:
+                                    <span>{{tournamentdata?.sechduleEnddate}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Tournamrent Status:
+                                    <span>{{tournamentdata?.showstatus}}</span>
+
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">
+                                    Status:<span>{{tournamentdata?.status}}</span></li>
+                                <li class="d-flex justify-content-between mb-2">Category:
+                                    <span>{{tournamentdata?.eventCategory}}</span>
+
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Tournament Formate:
+                                    <span>{{tournamentdata?.tournametformat}}</span>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                       
+                        <div class="mt-6">
+                                <div class="col-lg-8 ">
+                                    <h4>Genral Setting Details</h4>
+                                    <form [formGroup]="tournamentFormsetting" class="form-contact contact_form"
+                                        novalidate="novalidate"  >
+                                        <div class="row">
+
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Complete Tournament Name:
+                                                </label>
+                                                <input class="form-control" id="last-name" type="text"
+                                                    formControlName="fulltnmentName"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+
+                                                    <app-validation-message [control]="tournamentFormsetting.controls.fulltnmentName" [key]="'Tournament Name'"></app-validation-message>
+
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Minimum number of players per
+                                                    team: </label>
+                                                <input class="form-control" id="last-name" type="Number"
+                                                    formControlName="minPlayer"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['minPlayer'].errors }">
+                                                    <app-validation-message [control]="tournamentFormsetting.controls.minPlayer" [key]="'minPlayer'"></app-validation-message>
+
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Maximum number of players per
+                                                    team: </label>
+                                                <input class="form-control" id="last-name" type="number"
+                                                    formControlName="maxPlayer"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['maxPlayer'].errors }">
+                                                    <app-validation-message [control]="tournamentFormsetting.controls.maxPlayer" [key]="'maxPlayer'"></app-validation-message>
+
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Contect Email: </label>
+                                                <input class="form-control" id="last-name" type="email"
+                                                    formControlName="contactEmail"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['contactEmail'].errors }">
+                                                 
+                                                    <app-validation-message [control]="tournamentFormsetting.controls.contactEmail" [key]="'Contact Email'"></app-validation-message>
+
+                                            </div>
+
+                                            <div class="col-6 mb-3">
+                                                <!-- formControlName="gameMap" -->
+                                                <label class="form-label" for="last-name">Game Map: </label>
+                                                <input class="form-control" id="last-name" type="gameMap"
+                                                     placeholder="Erangel, Miramar"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['gameMap'].errors }">
+
+                                                    <!-- <app-validation-message [control]="tournamentFormsetting.controls.gameMap" [key]="'gameMap'"></app-validation-message> -->
+
+                                            </div>
+
+                                            <!-- formControlName="matchType" -->
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Match Type: </label>
+                                                <input class="form-control" id="last-name" type="text"
+                                                     placeholder="FPP/TPP"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['matchType'].errors }">
+                                                    <!-- <app-validation-message [control]="tournamentFormsetting.controls.gameMap" [key]="'gameMap'"></app-validation-message> -->
+
+                                            </div>
+
+
+
+
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Enable Registration:
+                                                </label><br>
+                                                <input type="radio" class="mb-3" [value]="false"
+                                                    formControlName="regEnable" />
+                                                <label for="dewey" class="mb-3">No</label>
+
+                                                <input type="radio" [value]="true" formControlName="regEnable" />
+                                                <label for="dewey">Yes</label>
+
+                                            </div>
+
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="sechduleStartdate">Registration Opening
+                                                    (timezone: Asia/Kolkata): </label>
+                                                <input class="form-control " id="sechduleStartdate" type="date"
+                                                    formControlName="regOpen"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['regOpen'].errors }">
+                                                <app-validation-message [control]="tournamentFormsetting.controls.regOpen" [key]="'RegOpen'">
+                                                </app-validation-message>
+
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="sechduleEnddate">Registration Closing
+                                                    (timezone: Asia/Kolkata)
+                                                    : </label>
+                                                <input class="form-control" id="sechduleEnddate" type="date"
+                                                    formControlName="regClose"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['regClose'].errors }">
+                                                <app-validation-message [control]="tournamentFormsetting.controls.regClose" [key]="'sechduleEnddate'">
+                                                </app-validation-message>
+
+                                            </div>
+
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Stream Platform: </label>
+                                                <input class="form-control" id="last-name" type="text"
+                                                    formControlName="streamPlateform"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+                                                    <app-validation-message [control]="tournamentFormsetting.controls.streamPlateform" [key]="'streamPlateform'">
+                                                    </app-validation-message>
+                                            </div>
+
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Stream Url: </label>
+                                                <input class="form-control" id="last-name" type="text"
+                                                    formControlName="streamUrl"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+                                                    <app-validation-message [control]="tournamentFormsetting.controls.streamUrl" [key]="'streamUrl'">
+                                                    </app-validation-message>
+                                            </div>
+
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label" for="last-name">Stream Profile ID: </label>
+                                                <input class="form-control" id="last-name" type="text"
+                                                    formControlName="streamProfileID"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+                                                    <app-validation-message [control]="tournamentFormsetting.controls.streamProfileID" [key]="'streamProfileID'">
+                                                    </app-validation-message>
+                                            </div>
+
+
+
+                                            <div class="col-6 mb-3">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="last-name">Tournament Description:
+                                                    </label>
+                                                    <textarea class="form-control w-100" name="message" id="message"
+                                                        formControlName="tnmentdescription" cols="30" rows="9"
+                                                        onfocus="this.placeholder = ''"
+                                                        onblur="this.placeholder = 'Enter Message'"
+                                                        placeholder="Enter Message"></textarea>
+                                                        <app-validation-message [control]="tournamentFormsetting.controls.tnmentdescription" [key]="'tnmentdescription'">
+                                                        </app-validation-message>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6 mb-3">
+
+                                                <div class="form-group">
+                                                    <label class="form-label" for="last-name">Tournament Prize :
+                                                    </label>
+
+                                                    <textarea class="form-control w-100" name="message" id="message"
+                                                        formControlName="tnmentPrize" cols="30" rows="9"
+                                                        onfocus="this.placeholder = ''"
+                                                        onblur="this.placeholder = 'Enter Message'"
+                                                        placeholder="Enter Message"></textarea>
+                                                        <app-validation-message [control]="tournamentFormsetting.controls.tnmentPrize" [key]="'tnmentPrize'">
+                                                        </app-validation-message>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="last-name">Tournament Rules: </label>
+                                                    <textarea class="form-control w-100" name="message" id="message"
+                                                        formControlName="tnmentRules" cols="30" rows="9"
+                                                        onfocus="this.placeholder = ''"
+                                                        onblur="this.placeholder = 'Enter Message'"
+                                                        placeholder="Enter Message"></textarea>
+                                                        <app-validation-message [control]="tournamentFormsetting.controls.tnmentRules" [key]="'tnmentRules'">
+                                                        </app-validation-message>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <button type="submit" class="btn btn-primary"
+                                                (click)="updatetnamentSetting()">Update Details
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--------------------------Match Info ------------------------------------>
+
+                <div class="tab-pane fade" id="match" role="tabpanel" aria-labelledby="match-tab">
+                    <button class="btn btn-primary  mt-2 mb-2" (click)="openmodaladdmatch()">Add
+                        match</button>
+                    
+                    <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid">
+                        <!-- <thead>
+                            <tr>
+                                <th>#</th>
+                         
+                            </tr>
+                        </thead> -->
+                        <tbody>
+                            <ng-container *ngFor="let matchdata of matchdata; let matchIndex = index">
+                                <tr>
+                                    <td colspan="1">
+                                        <strong>Match Group {{ matchIndex + 1 }}</strong>
+                                    </td>
+                                    <td colspan="1">
+                                        <strong>Match Formate {{ matchdata?.matchFormat }}</strong>
+                                    </td>
+                                    <td colspan="1">
+                                        <strong>Delete Match Group 
+                                             <button class="btn btn-danger" (click)="deleteMatch('All',matchdata,matchdata)">All Match Delete</button>
+                                        </strong>
+                                    </td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td colspan="9">
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Match No</th>
+                                                    <th>Round</th>
+                                                    <th>Category</th>
+                                                    <th>Status</th>
+                                                    <th>Participant Team Name</th>
+                                                    <!-- <th>Rank</th> -->
+                                                    <!-- <th>Kills</th> -->
+                                                    <th>Actions </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-container *ngFor="let data of matchdata?.allMatches; let i = index">
+                                                    <ng-container *ngFor="let team of data?.teams; let j = index">
+                                                        <tr class="border">
+                                                 
+                                                            <!-- Only display match details for the first row -->
+                                                            <td *ngIf="j === 0" [attr.rowspan]="data?.teams.length">{{ i + 1 }}</td>
+                                                            <td *ngIf="j === 0" [attr.rowspan]="data?.teams.length">{{ data?.matchNo }}</td>
+                                                            <td *ngIf="j === 0" [attr.rowspan]="data?.teams.length">{{ data?.round }}</td>
+                                                            <td *ngIf="j === 0" [attr.rowspan]="data?.teams.length">{{ data?.category }}</td>
+                                                            <td *ngIf="j === 0" [attr.rowspan]="data?.teams.length">
+                                                                <span class="badge bg-success" *ngIf="data.status === 'COMPLETED'">Completed</span>
+                                                                <span class="badge bg-warning text-dark" *ngIf="data.status === 'UPCOMING'">Upcoming</span>
+                                                                <span class="badge bg-primary" *ngIf="data.status === 'LIVE'">Live</span>
+                                                                <span class="badge bg-success" *ngIf="data.status === 'ACTIVE'">Active</span>
+
+                                                            </td>
+                                
+                                                            <!-- Team details -->
+                                                            <td>{{ team?.name }} </td>
+                                                          
+                                                            <!-- Actions (only shown once per match) -->
+                                                            <td *ngIf="j === 0" [attr.rowspan]="data?.teams.length">
+                                                                <button class="btn btn-primary me-2" (click)="showUpdatedmatchModal(matchdata,data)">Update</button>
+                                                                <button class="btn btn-danger" (click)="deleteMatch('Single',data,matchdata)">Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                
+                                
+                                
+                            </ng-container>
+                        </tbody>
+                    </table>
+                    
+                </div>
+
+
+
+                <!--------------------------Player Registration Info ------------------------------------>
+                <div class="tab-pane fade" id="registration" role="tabpanel" aria-labelledby="registration-tab">
+                    <div class="mt-3">
+                        <h5>Player Participent</h5>
+
+                        <div class="col-lg-4 ">
+                            <ul>
+                                <li class="d-flex justify-content-between mb-2">Participent:
+                                    <span>{{tournamentdata?.name}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Tournament Team Size
+                                    :<span>{{tournamentdata?.maxParticipentTeam}}</span></li>
+                            </ul>
+
+                        </div>
+
+                        <div class=" mt-4">
+                            <div>
+                                <h5>List Of Participent <button class="btn btn-sm btn-primary me-2"
+                                        (click)="refreshlist()">Refresh List
+                                    </button></h5>
+                                <div class="col-lg-12 ">
+                                    <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+                                        aria-describedby="dt-basic-example_info">
+                                        <thead class="btn-primary">
+                                            <tr role="row">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Clan,Team Name</th>
+                                                <th scope="col">Team Leader</th>
+                                                <th scope="col">Whatsup No </th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Registraion Date</th>
+                                                <th scope="col">Region</th>
+                                                <th scope="col">Rating</th>
+                                                <th scope="col">Registration Status</th>
+                                                <th scope="col">Change Status</th>
+                                                <th scope="col">Remark</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of this.playerRegistertournament;let i = index">
+                                                <th scope="row">{{i+1}}</th>
+                                                <td>{{data?.teamName}}</td>
+                                                <td>{{data?.teamLeader}}</td>
+                                                <td>{{data?.whatsupno}}</td>
+                                                <td>{{data?.email}}</td>
+                                                <td>{{data?.createdAt}}</td>
+                                               
+                                                <td>{{data?.region}}</td>
+                                                <td>{{data?.rating}}</td>
+                                                <td>{{data?.registrationStatus}}</td>
+                                                <td><button class="btn btn-primary col-sm-10  me-2"
+                                                        (click)="updatedRegisterTeamStatus(data)">Action</button></td>
+                                                <td>{{data?.remark}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                        <h3 *ngIf="this.playerRegistertournament?.length ==0">No record
+                                            Found
+                                        </h3>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--------------------------Player Result Info ------------------------------------>
+
+                <div class="tab-pane fade" id="result" role="tabpanel" aria-labelledby="result-tab">
+                    <div class=" mt-2">
+                        <h5>Matches</h5>
+
+                        <div class="col-lg-4 ">
+                            <ul>
+                                <li class="d-flex justify-content-between mb-2">Match:
+                                    <span>{{tournamentdata?.name}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Completed
+                                    :<span>{{tournamentdata?.maxParticipentTeam}}</span></li>
+
+                            </ul>
+                        </div>
+
+                        <div class=" mt-4">
+                            <div class="">
+                                <div class="">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="last-name">Select Match: </label>
+                                        <select class="form-select" (change)="selectMatchOption($event.target.value)">
+                                            <option selected disabled>Please Select Match</option>
+                                            <ng-container *ngFor="let matchdata of this.matchdata">
+                                            <option value="{{data?._id}}" *ngFor="let data of matchdata?.allMatches">
+                                                {{data?.matchNo}}-{{data?.round}}</option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="match format-header">
+                                    <div class="secondary"><span class="status"><i class="far fa-clock"></i> Match
+                                            pending</span></div>
+                                </div>
+
+                                <div class="" *ngIf="this.selectMatchIdResult">
+                                    <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+                                        aria-describedby="dt-basic-example_info">
+                                        <thead class="btn-primary">
+                                            <tr role="row">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Team Name </th>
+                                                <th scope="col">ForFeit(not able to jion)</th>
+                                                <th scope="col">In Game Rank</th>
+
+                                                <th scope="col">KillS</th>
+                                                <th scope="col">Score</th>
+                                                <th scope="col">Rank</th>
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- <ng-container *ngFor="let matchdata of this.matchdata">
+                                                <ng-container *ngFor="let team of matchdata?.allMatches"> -->
+
+                                            <tr *ngFor="let data of this.getRegisterTeam?.allMatches[0]?.teams">
+                                                <th scope="row">1</th>
+                                                <td>{{data?.name}}</td>
+                                                <td><input type="checkbox" name="vehicle1" value="Bike"
+                                                        [(ngModel)]="data.forFeit"> </td>
+                                                <td><input class="form-control" type="text" [(ngModel)]="data.gameRank">
+                                                </td>
+                                                <td><input class="form-control" type="text" [(ngModel)]="data.kills">
+                                                </td>
+                                                <td><input class="form-control" type="text" [(ngModel)]="data.score">
+                                                </td>
+                                                <td><input class="form-control" type="text" [(ngModel)]="data.rank">
+                                                </td>
+                                            </tr>
+                                            <!-- </ng-container>
+                                            </ng-container> -->
+                                        </tbody>
+                                        <!-- <h3 *ngIf="this.getRegisterTeam?.length ==0">No record Found</h3> -->
+                                    </table>
+                                    <div class="form-group mt-3">
+                                        <button type="submit" (click)="submitfinalResult()"
+                                            class="btn btn-primary button-contactForm btn_1">Submit Result
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+          
+
+                </div>
+
+                <!--------------------------Match Winner Result Info ------------------------------------>
+
+                <div class="tab-pane fade" id="winnerresult" role="tabpanel" aria-labelledby="winnerresult-tab">
+                    <div class="mt-2">
+                        <h5>Winner List</h5>
+
+                        <div class="col-lg-6 ">
+                            <ul>
+                                <li class="d-flex justify-content-between mb-2">Tournament:
+                                    <span>{{tournamentdata?.name}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Entry
+                                    :<span>{{tournamentdata?.entrycharges}}</span></li>
+                                <li class="d-flex justify-content-between mb-2">Prize
+                                    :<span>{{tournamentdata?.prize}}</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="">
+                                <div id="accordion">
+                                    <ng-container *ngFor="let allmatchdata of this.matchdata;">
+                                    <ng-container *ngFor="let match of allmatchdata?.allMatches;let i=index">
+                                        
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse"
+                                                    [attr.data-target]="'#collapseOne'+i" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    <span class="mr-2"> #{{i+1}} Match {{match?.matchNo}}</span> Status
+                                                    :{{match?.status}}
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div [id]="'collapseOne'+i" class="collapse " aria-labelledby="headingOne"
+                                            data-parent="#accordion">
+                                            <div class="">
+                                                <table class="table table-sm w-100 inMobile inDesktopMd dataTable"
+                                                    role="grid" aria-describedby="dt-basic-example_info">
+                                                    <thead class="btn-primary">
+                                                        <tr role="row">
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Team Name </th>
+                                                            <th scope="col">ForFeit(not able to jion)</th>
+                                                            <th scope="col">In Game Rank</th>
+                                                            <th scope="col">KillS</th>
+                                                            <th scope="col">Score</th>
+                                                            <th scope="col">Rank</th>
+                                                            <th scope="col">Img</th>
+
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let data of match?.teams">
+                                                            <th scope="row">1</th>
+                                                            <td>{{data?.name}}</td>
+                                                            <td>{{data?.forFeit}}</td>
+                                                            <td>{{data?.gameRank}} </td>
+                                                            <td>{{data?.kills}}</td>
+                                                            <td>{{data?.score}} </td>
+                                                            <td>{{data?.rank}} </td>
+                                                            <td *ngIf="data?.rank==1"> <img src="assets/img/1winner.jpg"
+                                                                    width="60" alt="random image"> </td>
+                                                            <td *ngIf="data?.rank==2"> <img src="assets/img/2winner.jpg"
+                                                                    width="60" alt="random image"> </td>
+                                                            <td *ngIf="data?.rank==3"> <img src="assets/img/3winner.jpg"
+                                                                    width="60" alt="random image"> </td>
+
+
+                                                        </tr>
+                                                    </tbody>
+                                                    <!-- <h3 *ngIf="match?.matchresult.length ==0">No record Found</h3> -->
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </ng-container>
+                                   </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--------------------------Player Structure Info ------------------------------------>
+                    <div class="tab-pane fade" id="structure" role="tabpanel" aria-labelledby="structure-tab">
+                        <div class="container">
+
+                            <button class="btn btn-primary col-sm-2 m-2">Create New Stage
+                            </button>
+                            <br>
+
+
+                            <button class="btn btn-primary col-sm-2 m-2">Duel
+                            </button>
+
+                            <button class="btn btn-primary col-sm-2 m-2">FFA
+                            </button>
+
+                            <button class="btn btn-primary col-sm-2 m-2">Simple Stage
+                            </button>
+
+
+                            <div class=" mt-4">
+                                <div class="">
+                                    <h5>Configure stage: Simple</h5>
+                                    <div class="col-lg-12 ">
+                                        <form class="form-contact contact_form" method="post" id="contactForm"
+                                            novalidate="novalidate">
+                                            <div class="row">
+
+                                                <div class="col-6 mb-3">
+                                                    <label class="form-label" for="last-name">Number: </label>
+                                                    <input class="form-control" id="last-name" type="text"
+                                                        placeholder="1"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label class="form-label" for="last-name">Size: </label>
+                                                    <input class="form-control" id="last-name" type="text"
+                                                        placeholder="44"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+
+                                                </div>
+
+                                                <div class="col-6 mb-3">
+                                                    <label class="form-label" for="last-name">Name
+                                                        (maximum 30 characters): </label>
+                                                    <input class="form-control" id="last-name" type="text"
+                                                        placeholder="Kill to win"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+
+                                                </div>
+
+                                                <div class="col-6 mb-3">
+                                                    <label class="form-label" for="last-name">Number of matches:
+                                                    </label>
+                                                    <input class="form-control" id="last-name" type="text"
+                                                        placeholder="1"
+                                                        [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+
+                                                </div>
+
+                                                <div class="col-6 mb-3">
+                                                    <label class="form-label" for="last-name">Formate: </label>
+                                                    <select class="form-select">
+                                                        <option value="INACTIVE">No game</option>
+                                                        <option selected value="ACTIVE">Single game </option>
+                                                        <option value="ACTIVE">Home and away </option>
+
+                                                        <option value="ACTIVE">Best-of</option>
+                                                        <option value="ACTIVE">Fixed games</option>
+
+
+
+                                                    </select>
+
+                                                </div>
+
+                                                <div class="col-6  mb-3">
+                                                    <label class="form-label" for="last-name">Calculation: </label>
+                                                    <select class="form-select">
+                                                        <option value="None">None(set Manual score)</option>
+                                                        <option value="Score_Based">Score-based </option>
+                                                        <option value="Result_Based">Result-based </option>
+                                                        <option value="Best_Of">Best-of</option>
+                                                        <option value="Fixed_Games">Fixed games</option>
+                                                        <option value="Kill_Based">Kill-Based</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group mt-3">
+                                                <button type="submit" class="btn btn-primary">Create Stage
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!---------------------------------Player Banking------------------->
+                <div class="tab-pane fade" id="playerbanking" role="tabpanel" aria-labelledby="playerbanking-tab">
+                <div class="row">
+                    <div class="col-xl-12">
+                
+                
+                        <div class="">
+                        <input type="text" class="form-control col-md-2" placeholder="search by user name">
+                        <!-- <button class="btn btn-primary mx-2" (click)="refreshbankingDetail()">Refresh </button> -->
+                        </div>
+                        <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+                        aria-describedby="dt-basic-example_info" *ngIf="!this.object.isUser">
+                          <thead class="btn-primary">
+                            <tr role="row">
+                              <th scope="col">#</th>
+                              <th scope="col">Team Name</th>
+                              <th scope="col">User Name</th>
+                              <!-- <th scope="col">Team Email</th> -->
+                              <th scope="col">Team Number</th>
+                              <!-- <th scope="col">Role</th> -->
+                              <th scope="col">Status</th>
+                              <th scope="col">Bonus</th>
+                              <th scope="col">Expouser</th>
+                              <!-- <th scope="col">Total Balance</th> -->
+                              <th scope="col">Ava. Balance</th>
+                              <th scope="col" *ngIf="this.messageresponse?.length > 0">Message</th>
+                              <th scope="col">D/W</th>
+                              <th scope="col">Remark</th>
+                  
+                              <!-- <th scope="col">Update</th> -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let data of this.userdata;let i=index">
+                              <th scope="row">{{i+1}}</th>
+                              <td>{{data?.teamInfo?.teamName}}</td>
+                              <td>{{data?.name}}</td>
+                              <!-- <td>{{data?.teamInfo?.email}}</td> -->
+                              <td>{{data?.number || '-'}}</td>
+                              <!-- <td>{{data?.role}}</td> -->
+                              <td>{{data?.active}}</td>
+                              <td>{{data?.wallet?.bonus}}</td>
+                              <td>{{data?.wallet?.exposure}}</td>
+                              <!-- <td>{{data?.wallet?.totalCoin}}</td> -->
+                              <td>{{data?.wallet?.availableCoins}}</td>
+                              <td *ngIf="this.messageresponse?.length > 0">
+                                <ng-container *ngFor="let datamessage of this.messageresponse">
+                                  <ng-container *ngIf="datamessage?._id==data?._id">
+                                   <span [ngClass]="datamessage?.mcode==200 ? 'sucess':'error'"> {{datamessage?.message}}</span>
+                                  </ng-container> 
+                                </ng-container>
+                              </td>
+                              <td>
+                           
+                               <div class="d-flex align-items-center input-wid">
+                                <div class="btn-group2 btn-group-toggle dwGroup">
+                                    <label for="toggle-on1_{{data?._id}}" class="btn btn-secondary btn-sm mr-1"  [ngClass]="data?.bankingOption == 0 ?  'active-D': ''">
+                                    <input id="toggle-on1_{{data?._id}}"
+                                        
+                                        name="toggle_{{data?._id}}" value="0" [(ngModel)]="data.bankingOption" type="radio"
+                                        (click)="isDepositesection(i)"
+                                        >
+                                    D</label>
+                                    <label for="toggle-off1_{{data?._id}}" class="btn btn-secondary btn-sm" [ngClass]="data.bankingOption == 1 ?  'active-W': ''">
+                                    <input id="toggle-off1_{{data?._id}}"
+                                        
+                                        name="toggle_{{data?._id}}" value="1" [(ngModel)]="data.bankingOption" type="radio"
+                                        (click)="isWidthrawsection(i)"
+                                        >
+                  
+                                    W</label>
+                                </div>
+                                <div class="col-12"><input type="number" [disabled]="!(data.bankingOption)" class="form-control mx-2" placeholder="enter amount" [(ngModel)]="data.amount"></div>
+                  
+                                </div>
+                              </td>
+                              <td> <input type="text" class="form-control" placeholder="remark" [(ngModel)]="data.remark">
+                              </td>
+                  
+                            </tr>
+                            
+                  
+                          </tbody>
+                          
+                          <h3 class=" " *ngIf="this.userdata?.length ==0">No record Found</h3>
+                        </table>
+                      <div class="col-12  mt-2 d-flex justify-content-end">
+                        <button class="btn btn-primary mr-2" (click)="submitbankingDetail()">Update </button>
+                        <button class="btn btn-primary" (click)="clearbankingDetail()">Clear All Changes</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
+
+<!-------------------------Add  Match modal---->
+<div class="modal fade" id="add-match" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 *ngIf="!this.selectedMatchData" class="modal-title">Add match</h5>
+                <h5 *ngIf="this.selectedMatchData" class="modal-title">Update match</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="container">
+                <div class="col-md-12 p-5">
+                    <form [formGroup]="matchForm">
+                        <div class="mb-3"  *ngIf="this.selectedMatchData">
+                            <label class="form-label" for="last-name">Match No: </label>
+                            <input class="form-control" id="last-name" type="number" formControlName="matchNo"
+                                [ngClass]="{ 'is-invalid': submitted && f['matchNo'].errors }">
+
+                        </div>
+                        <div class="mb-3"  *ngIf="this.selectedMatchData">
+                            <label class="form-label" for="last-name">Match Round: </label>
+                            <input class="form-control" id="last-name" type="number" formControlName="round"
+                                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+
+                            <app-validation-message [control]="matchForm.controls.round" [key]="'match Round'">
+                            </app-validation-message>
+                        </div>
+                        <!-- <div class="mb-3">
+                            <label class="form-label" for="last-name">Teams Per Match: </label>
+                            <input class="form-control" id="last-name" type="number" formControlName="teamsPerMatch"
+                                [ngClass]="{ 'is-invalid': submitted && f['teamsPerMatch'].errors }">
+
+                        </div> -->
+
+                        <!-- <div class="mb-3">
+                            <label class="form-label" for="last-name">Formate: </label>
+                            <select class="form-select" formControlName="matchFormate">
+                                <option value="INACTIVE">No game</option>
+                                <option value="ACTIVE">Single game </option>
+                                <option value="ACTIVE">Home and away </option>
+
+                                <option value="ACTIVE">Best-of</option>
+                                <option value="ACTIVE">Fixed games</option>
+                            </select>
+                        </div> -->
+                        <!-- <div class="mb-3">
+                                <label class="form-label" for="last-name">Number of Games (only in Fixed games,Best-of
+                                    ): </label>
+                                <input class="form-control" id="last-name" type="number" formControlName="round"
+                                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+
+                                <app-validation-message [control]="matchForm.controls.round" [key]="'match Round'">
+                                </app-validation-message>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="last-name">Automatically end the match when a winner is
+                                    known? (only in Best-of): </label>
+                                <input class="form-control" id="last-name" type="radio" formControlName="round"
+                                    [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+                                Yes
+                                <app-validation-message [control]="matchForm.controls.round" [key]="'match Round'">
+                                </app-validation-message>
+                            </div> -->
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="last-name">Calculation: </label>
+                            <select class="form-select" formControlName="scoreCalculation">
+                                <option value="None" selected>None(set Manual score)</option>
+                                <option value="Score_Based" selected>Score-based </option>
+                                <option value="Result_Based">Result-based </option>
+                                <option value="Best_Of">Best-of</option>
+                                <option value="Fixed_Games">Fixed games</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="last-name">Status: </label>
+                            <select class="form-select" formControlName="status">
+                                <option value="INACTIVE" selected>INACTIVE</option>
+                                <option value="ACTIVE">ACTIVE </option>
+                            </select>
+                        </div>
+                        <app-validation-message [control]="matchForm.controls.status" [key]="'Status'">
+                        </app-validation-message>
+
+
+
+
+                        <button *ngIf="!this.selectedMatchData" (click)="onAddmatch()" class="btn btn-primary"
+                            type="submit">Submit</button>
+
+                        <button *ngIf="this.selectedMatchData" (click)="updatematch()" class="btn btn-primary"
+                            type="submit">Update</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-------------------------Change Player Registraion Status modal---->
+<div class="modal fade" id="tnmanetregister-user" tabindex="-1">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                Change Status
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="container">
+                <div >
+                    <div class="col-md-12">
+                        <a class="btn btn-success circle arrow m-2" (click)="getStatuas('APPROVED')">APPROVE</a>
+                        <a class="btn btn-danger circle arrow  m-2" (click)="getStatuas('REJECTED')">REJECT</a>
+                        <a class="btn btn-warning circle arrow m-2" (click)="getStatuas('PENDING')">PENDING</a>
+                        <a class="btn btn-warning circle arrow m-2" (click)="getStatuas('CANCEL_ADMIN')">CANCEL</a>
+
+                        <span>Selected Status:{{this.getUserStatus || 'N/A'}}</span>
+                        <div class="mt-30">
+                            <label class="form-label" for="last-name">Remark: </label>
+                            <input class="form-control" id="last-name" type="text" [(ngModel)]="remarktext">
+                        </div>
+                        <div class="mt-30 p-10"> 
+                        <button class="btn btn-primary col-sm-4 " (click)="updateRegisterUser()">Change
+                            Status</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loader *ngIf="loader"></app-loader>

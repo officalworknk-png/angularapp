@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- <title>Admin</title> -->
+    <base href="/">
+    <link rel="icon" type="image/x-icon" href="" id="appFavicon" />
+
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link id="myskin" rel="stylesheet" media="screen, print" href="assets/dist/css/skins/skin-master.css">
+    <link rel="stylesheet" media="screen, print" href="assets/dist/css/datagrid/datatables/datatables.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="assets/dist/css/notifications/sweetalert2/sweetalert2.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="assets/dist/css/formplugins/bootstrap-datepicker/bootstrap-datepicker.css">
+    <link rel="stylesheet" media="screen, print" href="assets/dist/css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+    <link rel="stylesheet" media="screen, print" href="assets/dist/css/notifications/sweetalert2/sweetalert2.bundle.css.map">
+    <link rel="stylesheet" media="screen, print" href="assets/dist/css/vendors.bundle.css" />
+    <link id="appbundle" rel="stylesheet" media="screen, print" href="assets/dist/css/app.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="assets/dist/css/notifications/toastr/toastr.css">   
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+</head>
+
+<body class="mod-bg-1 mod-skin-light">
+
+    <script>
+
+
+        /**
+         *	This script should be placed right after the body tag for fast execution 
+         *	Note: the script is written in pure javascript and does not depend on thirdparty library
+         **/
+        'use strict';
+
+        var classHolder = document.getElementsByTagName("BODY")[0],
+            /** 
+             * Load from localstorage
+             **/
+            themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+                {},
+            themeURL = themeSettings.themeURL || '',
+            themeOptions = themeSettings.themeOptions || '';
+            console.log("-->",themeSettings)
+
+        /** 
+         * Load theme options
+         **/
+        if (themeSettings.themeOptions) {
+            classHolder.className = themeSettings.themeOptions;
+            console.log("%c✔ Theme settings loaded", "color: #148f32");
+        }
+        else {
+            // var data:{}
+            console.log("-->",themeSettings)
+            // data.themeOptions="mod-bg-1 mod-skin-light"
+            // data.themeURL="assets/dist/css/themes/cust-theme-3.css"
+
+            localStorage.setItem("themeSettings", JSON.stringify({"themeOptions":"mod-bg-1 mod-skin-light","themeURL":"assets/dist/css/themes/cust-theme-3.css"}));
+            window.location.reload();
+
+            console.log("%c✔ Heads up! Theme settings is empty or does not exist, loading default settings...", "color: #ed1c24");
+        }
+        if (themeSettings.themeURL && !document.getElementById('mytheme')) {
+            var cssfile = document.createElement('link');
+            cssfile.id = 'mytheme';
+            cssfile.rel = 'stylesheet';
+            cssfile.href = themeURL;
+            document.getElementsByTagName('head')[0].appendChild(cssfile);
+
+        }
+        else if (themeSettings.themeURL && document.getElementById('mytheme')) {
+            document.getElementById('mytheme').href = themeSettings.themeURL;
+        }
+        /** 
+         * Save to localstorage 
+         **/
+        var saveSettings = function () {
+            themeSettings.themeOptions = String(classHolder.className).split(/[^\w-]+/).filter(function (item) {
+                return /^(nav|header|footer|mod|display)-/i.test(item);
+            }).join(' ');
+            if (document.getElementById('mytheme')) {
+                themeSettings.themeURL = document.getElementById('mytheme').getAttribute("href");
+            };
+            localStorage.setItem('themeSettings', JSON.stringify(themeSettings));
+        }
+        /** 
+         * Reset settings
+         **/
+        var resetSettings = function () {
+            localStorage.setItem("themeSettings", JSON.stringify({"themeOptions":"","themeURL":"assets/dist/css/themes/cust-theme-3.css"}));
+        }
+
+
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="assets/dist/js/vendors.bundle.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="assets/dist/js/notifications/sweetalert2/sweetalert2.bundle.js"></script>
+    <script src="assets/dist/js/app.bundle.js"></script>
+    <script src="assets/dist/js/table-scroll.js"></script>
+
+
+
+
+
+
+
+
+    <app-root></app-root>
+
+
+    <script>
+        $('input:checkbox').change(function () {
+            if ($(this).is(":checked")) {
+                $('#table-example').addClass($(this).attr("data-class"));
+            }
+            else {
+                $('#table-example').removeClass($(this).attr("data-class"));
+            }
+        });
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        // for casino stram
+        function loadHTMLVideo(sname) {
+            var webrtcPlayer = null;
+            try {
+                webrtcPlayer = new T20RTCPlayer("remoteVideo", sname, "", "real-game.live", "", true, true, "tcp");
+                webrtcPlayer.Play();
+            } catch (error) {
+                // console.log(error)
+            }
+        }
+        function loadStreamVideo(sname, url) {
+
+            var webrtcPlayer = null;
+            try {
+                webrtcPlayer = new T20RTCPlayer("remoteVideo", sname, "", url, "", true, true, "tcp");
+                webrtcPlayer.Play();
+            } catch (error) {
+                // console.log(error)
+            }
+        }
+
+        window.addEventListener('online', () => document.getElementById('gscale').classList.remove('grayscale'));
+        window.addEventListener('offline', () => document.getElementById('gscale').classList.add('grayscale'));
+    </script>
+
+
+    <script type="text/javascript" src="assets/dist/js/datagrid/datatables/datatables.bundle.js"></script>
+    <script type="text/javascript" src="assets/dist/js/datagrid/datatables/datatables.export.js"></script>
+</body>
+
+</html>

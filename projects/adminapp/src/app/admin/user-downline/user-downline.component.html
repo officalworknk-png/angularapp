@@ -1,0 +1,134 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+  <h2 class="titleText">{{'Player Downline' | titlecase}}</h2>
+  <div class="row">
+    <div class="col-xl-12">
+      <button class="btn btn-primary  mb-2 " (click)="addUser(data)">Add User </button>
+      <!-- <div class="table-responsive tableHeight-noPagination sNoAction-CellFixed" id="container"></div> -->
+      <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+        aria-describedby="dt-basic-example_info" *ngIf="!this.object.isUser">
+        <thead class="btn-primary">
+          <tr role="row">
+            <th scope="col">#</th>
+            <th scope="col">Player Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Number</th>
+            <th scope="col">Role</th>
+            <th scope="col">Status</th>
+
+            <th scope="col">Action</th>
+            <th scope="col" *ngIf="this.object.isOwner">Delete</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of this.userdata;let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{data?.name}}</td>
+            <td>{{data?.email}}</td>
+            <td>{{data?.phoneNumber}}</td>
+            <td>{{data?.role}}</td>
+            <td>{{data?.active}}</td>
+            <td><button class="btn btn-primary  mr-2" (click)="viewUser(data)">View </button>
+              <button class="btn btn-primary   mr-2" (click)="updateUser(data)">Update </button>
+            </td>
+            <td *ngIf="this.object.isOwner"><button class="btn btn-primary   me-2" (click)="deleteUser(data)">delete
+              </button></td>
+
+          </tr>
+        </tbody>
+        <h3 class=" " *ngIf="this.userdata?.length ==0">No record Found</h3>
+      </table>
+    </div>
+  </div>
+
+
+  <!-------------__ADD/Update User------------------>
+  <div class="modal fade" id="add-user" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="!this.selectedUser" class="modal-title">Add Player</h5>
+          <h5 *ngIf="this.selectedUser" class="modal-title">Update Player</h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+          </button>
+        </div>
+
+
+        <div class="container">
+          <div class="col-md-12 p-5">
+            <form [formGroup]="profileForm">
+              <!-- (ngSubmit)="onSubmit()" -->
+              <div class="mb-3">
+                <label class="form-label" for="last-name">Player Name: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="name"
+                  [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+                <!-- <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['name'].errors['required']">User is required</div>
+                  </div> -->
+                <app-validation-message [control]="profileForm.controls.name"
+                  [key]="'Username'"></app-validation-message>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="last-name">Phone Number: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="phoneNumber"
+                  [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }">
+                <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                  <div *ngIf="f['phoneNumber'].errors['required']">Phone is required</div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="last-name">Email: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="email"
+                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                <!-- <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                  </div> -->
+                <app-validation-message [control]="profileForm.controls.email" [key]="'Email'"></app-validation-message>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="last-name">Role: </label>
+                <select class="form-select dropdown-toggle " formControlName="role" >
+                  <option value="PLAYER" selected [disabled]="this.selectedUser">PLAYER</option>
+                  <option value="ADMIN" [disabled]="this.selectedUser">ADMIN </option>
+                  <!-- <option value="DEFAULT_ADMIN">DEFAULT_ADMIN </option> -->
+                  <!-- <option value="OWNER">OWNER</option> -->
+                </select>
+              </div>
+              <app-validation-message [control]="profileForm.controls.role" [key]="'Role'"></app-validation-message>
+
+              <div class="mb-3">
+                <label class="form-label" for="last-name">Status: </label>
+                <select class="form-select" formControlName="active" >
+                  <option value="ACTIVE" >ACTIVE</option>
+                  <option value="INACTIVE" selected >INACTIVE </option>
+                </select>
+              </div>
+              <app-validation-message [control]="profileForm.controls.active" [key]="'Status'"></app-validation-message>
+
+              <div class="mb-3" *ngIf="this.object.isOwner || !this.selectedUser">
+                <label class="form-label" for="last-name">Password: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="password"
+                  [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                <app-validation-message [control]="profileForm.controls.password"
+                  [key]="'Password'"></app-validation-message>
+              </div>
+              <!-- [disabled]="!profileForm.valid" -->
+              <button *ngIf="!this.selectedUser" (click)="onSubmit()" class="btn btn-primary"
+                type="submit">Submit</button>
+              <button *ngIf="this.selectedUser" (click)="updateSubmit()" class="btn btn-primary"
+                type="submit">Update</button>
+
+            </form>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,93 @@
+<section class="gallery_part section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <h2>Register Team </h2>
+                </div>
+            </div>
+        </div>
+        <form [formGroup]="teamCreateForm" >
+            <div class="row gallery-item teamform">
+                <div class="col-md-4 p-3 ">
+                    <label class="form-label" for="teamName">Clan, Team Name: </label>
+                    <input class="form-control" id="teamName" type="text" formControlName="teamName"
+                        [ngClass]="{ 'is-invalid': submitted && f['teamName'].errors }">
+
+                    <app-validation-message [control]="teamCreateForm.controls.teamName" [key]="'Team name'">
+                    </app-validation-message>
+                </div>
+                <div class="col-md-4 p-3 ">
+                    <label class="form-label" for="number">Whatsup Number: </label>
+                    <input class="form-control" id="number2" type="text" formControlName="whatsupno"
+                        [ngClass]="{ 'is-invalid': submitted && f['whatsupno'].errors }">
+                    <app-validation-message [control]="teamCreateForm.controls.whatsupno" [key]="'Whatsup Number'">
+                    </app-validation-message>
+                </div>
+
+                <div class="col-md-4 p-3  ">
+                    <label class="form-label" for="email">Email: </label>
+                    <input class="form-control" id="email2" type="text" formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                    <app-validation-message [control]="teamCreateForm.controls.email" [key]="'Email'">
+                    </app-validation-message>
+                </div>
+
+
+                <div formArrayName="players"  class="col-md-4 p-3  "
+                    *ngFor="let playerInfo of teamCreateForm.get('players')['controls']; let i = index;let last = last">
+                    <div [formGroupName]="i" >
+                        <p>Player {{i+1}} <span *ngIf="i==0">(Team Leader)</span></p>
+
+                        <div class="">
+                            <label class="form-label" for="playerName">Player Name: </label>
+                            <input class="form-control"  type="text" formControlName="playerName"
+                                [ngClass]="{ 'is-invalid': submitted && f['playerName'].errors }">
+                            <app-validation-message [control]="playerInfo.controls.playerName" [key]="'Team name'">
+                            </app-validation-message>
+                        </div>
+
+                        <div class="">
+                            <label class="form-label" for="uid">UID: </label>
+                            <input class="form-control"  type="text" formControlName="uid"
+                                [ngClass]="{ 'is-invalid': submitted && f['uid'].errors }">
+                            <app-validation-message [control]="playerInfo.controls.uid" [key]="'UID'">
+                            </app-validation-message>
+                        </div>
+
+                        <div class="">
+                            <label class="form-label" for="discordUserName">Discord Username: </label>
+                            <input class="form-control"  type="text" formControlName="discordUserName"
+                                [ngClass]="{ 'is-invalid': submitted && f['discordUserName'].errors }">
+                            <app-validation-message [control]="playerInfo.controls.discordUserName"
+                                [key]="'Discord user name'"></app-validation-message>
+
+                        </div>
+                        <div class="p-2">
+                            <label class="form-label" for="active">Active Player: </label>
+                            <div class="confirm-switch">
+                                <input type="checkbox" id="{{ 'confirm-switch' + i }}"  checked="" formControlName="active">
+                                <label for="{{ 'confirm-switch' + i }}"></label>
+                            </div>
+                        </div>
+                        <button (click)="removePlayer(i)" class="btn_1 button-contactForm " type="submit">Remove
+                            Player </button>
+
+                        <button *ngIf="last" (click)="addPlayer()" class="btn_1 button-contactForm m-2" type="submit">Add Player</button>
+
+                    </div>
+                </div>
+                <div class="d-flex-end" *ngIf="!this.teamUsertdata">
+                    <button (click)="onSubmit()" class="btn_1 button-contactForm  me-2 " type="submit">Submit</button>
+                    <button (click)="closeSignupmodal()" class="btn_1 button-contactForm " type="submit">Reset</button>
+              </div>
+              <div class="d-flex-end" *ngIf="this.teamUsertdata">
+                <button (click)="updateteam()" class="btn_1 button-contactForm  me-2 " type="submit">Update</button>
+          </div>
+
+            </div>
+        </form>
+
+
+    </div>
+</section>

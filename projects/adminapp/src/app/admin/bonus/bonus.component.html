@@ -1,0 +1,153 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+  <h2 class="titleText">{{'Bonus' | titlecase}}</h2>
+  <div class="row">
+    <div class="col-xl-12">
+
+      <button class="btn btn-primary mb-2" (click)="addbonus(data)">Add bonus </button>
+      <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+        aria-describedby="dt-basic-example_info">
+        <thead class="btn-primary">
+          <tr role="row">
+            <th scope="col">#</th>
+            <th scope="col">Bonus Name</th>
+            <th scope="col">Max Amount</th>
+            <th scope="col">Valid From</th>
+            <th scope="col">Valid Till</th>
+            <th scope="col">Bonus Type</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Status</th>
+            <th scope="col">Update</th>
+            <th scope="col" *ngIf="this.object.isOwner">Delete</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of this.bonusData;let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{data?.bonusName}}</td>
+            <td>{{data?.maxBonusAmount}}</td>
+            <td>{{data?.validFrom}}</td>
+            <td>{{data?.validTill}}</td>
+            <td>{{data?.bonusType}}</td>
+            <td>{{data?.active}}</td>
+            <td>{{data?.createdby}}</td>
+
+
+
+            <td><button class="btn btn-primary col-sm-10  me-2" (click)="updatebonus(data)">Update </button></td>
+            <td *ngIf="this.object.isOwner"><button class="btn btn-primary col-sm-10  me-2"
+                (click)="deletebonus(data)">delete </button></td>
+
+          </tr>
+        </tbody>
+        <h3 class=" " *ngIf="this.bonusdata?.length ==0">No record Found</h3>
+      </table>
+    </div>
+  </div>
+</main>
+
+
+<!-------------ADD/Update bonus------------------>
+<div class="modal fade" id="add-bonus" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="!this.selectedBonus" class="modal-title">Add bonus</h5>
+        <h5 *ngIf="this.selectedBonus" class="modal-title">Update bonus</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="fal fa-times"></i></span>
+        </button>
+      </div>
+
+
+      <div class="container">
+        <form [formGroup]="bonusForm">
+          <div class="row ">
+
+            <div class="col-6 mb-3">
+              <label class="form-label" for="last-name">Bonus Name: </label>
+              <input class="form-control" id="last-name" type="text" formControlName="bonusName"
+                [ngClass]="{ 'is-invalid': submitted && f['bonusName'].errors }">
+
+              <app-validation-message [control]="bonusForm.controls.bonusName" [key]="'bonusname'">
+              </app-validation-message>
+            </div>
+            <div class="col-6 mb-3">
+              <label class="form-label" for="last-name">Bonus Type: </label>
+              <input class="form-control" id="last-name" type="text" formControlName="bonusType"
+                [ngClass]="{ 'is-invalid': submitted && f['bonusType'].errors }">
+
+              <app-validation-message [control]="bonusForm.controls.bonusType" [key]="'bonusType'">
+              </app-validation-message>
+            </div>
+            <div class="col-6 mb-3">
+              <label class="form-label" for="last-name">Max Bonus Amount: </label>
+              <input class="form-control" id="last-name" type="text" formControlName="maxBonusAmount"
+                [ngClass]="{ 'is-invalid': submitted && f['maxBonusAmount'].errors }">
+
+            </div>
+
+
+
+            <div class="col-6 mb-3">
+              <label class="form-label" for="last-name">Bonus Sequence: </label>
+              <input class="form-control" id="last-name" type="text" formControlName="seq"
+                [ngClass]="{ 'is-invalid': submitted && f['seq'].errors }">
+
+            </div>
+            <div class="col-6 mb-3">
+              <label class="form-label" for="sechduleStartdate">Bonus Start From
+                (timezone: Asia/Kolkata): </label>
+              <input class="form-control " id="sechduleStartdate" type="date" formControlName="validFrom"
+                [ngClass]="{ 'is-invalid': submitted && f['validFrom'].errors }">
+
+
+            </div>
+
+
+            <div class="col-6 mb-3">
+              <label class="form-label" for="sechduleStartdate">Bonus End
+                (timezone: Asia/Kolkata): </label>
+              <input class="form-control " id="sechduleStartdate" type="date" formControlName="validTill"
+                [ngClass]="{ 'is-invalid': submitted && f['validTill'].errors }">
+
+
+            </div>
+
+            <div class="col-6 mb-3">
+              <div class="form-group">
+                <label class="form-label" for="last-name">Bonus Description:
+                </label>
+                <textarea class="form-control w-100" name="message" id="message" formControlName="description" cols="30"
+                  rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"
+                  placeholder="Enter Message"></textarea>
+              </div>
+            </div>
+
+            <div class="col-6 mb-3">
+              <label class="form-label" for="last-name">Bonus Active: </label><br>
+              <input type="radio" class="mb-3" [value]="false" formControlName="active" />
+              <label for="dewey" class="mb-3">No</label>
+
+              <input type="radio" [value]="true" formControlName="active" />
+              <label for="dewey">Yes</label>
+
+            </div>
+
+
+            <button *ngIf="!this.selectedBonus" (click)="onSubmit()" class="btn btn-primary"
+              type="submit">Submit</button>
+            <button *ngIf="this.selectedBonus" (click)="updateSubmit()" class="btn btn-primary"
+              type="submit">Update</button>
+
+          </div>
+        </form>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

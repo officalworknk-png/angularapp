@@ -1,0 +1,61 @@
+<div class="modal fade" id="player-signup" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Signup</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="container">
+                    <div class="col-md-12 p-5">
+                        <form [formGroup]="playerSignupForm" >
+                            <!-- (ngSubmit)="onSubmit()" -->
+                            <div class="mb-3">
+                              <label class="form-label" for="name">User Name: </label>
+                              <input class="form-control" id="name" type="text" formControlName="name"
+                                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+                             
+                              <app-validation-message [control]="playerSignupForm.controls.name"
+                                                                [key]="'Username'"></app-validation-message>
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="number">Phone Number: </label>
+                              <input class="form-control" id="number" type="text" formControlName="number"
+                                [ngClass]="{ 'is-invalid': submitted && f['number'].errors }">
+                                <app-validation-message [control]="playerSignupForm.controls.number"
+                                [key]="'Phone Number'"></app-validation-message>
+                            </div>
+                
+                            <div class="mb-3">
+                              <label class="form-label" for="email">Email: </label>
+                              <input class="form-control" id="email1" type="text" formControlName="email"
+                                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                              <app-validation-message [control]="playerSignupForm.controls.email"
+                                                                [key]="'Email'"></app-validation-message>
+                            </div>
+                      
+                            <div class="mb-3">
+                              <label class="form-label" for="password">Password: </label>
+                              <input class="form-control" id="password1" type="password" formControlName="password"
+                                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                                <app-validation-message [control]="playerSignupForm.controls.password"
+                                [key]="'Password'"></app-validation-message>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="refCode">Ref Code: </label>
+                                <input class="form-control" id="refCode" type="text" formControlName="refCode"
+                                  [ngClass]="{ 'is-invalid': submitted && f['refCode'].errors }">
+                                  <app-validation-message [control]="playerSignupForm.controls.refCode"
+                                  [key]="'Ref Code'"></app-validation-message>
+                              </div>
+                            <div class="d-flex-end">
+                            <button  (click)="onSubmit()" class="btn_1 button-contactForm  me-2 " type="submit" >Submit</button>
+                            <button  (click)="closeSignupmodal()" class="btn_1 button-contactForm " type="submit" >Cancel</button>
+                             </div>
+                          </form>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

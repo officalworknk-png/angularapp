@@ -1,0 +1,305 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+    <h2 class="titleText">{{'Player Info' | titlecase}}</h2>
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- nav-fill -->
+            <ul class="nav nav-tabs " id="myTab" role="tablist">
+                <li (click)="storeTab('home')" class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">
+                        <h4>Player Info</h4>
+                    </button>
+                </li>
+                <li (click)="storeTab('teamInfo')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="teamInfo-tab" data-toggle="tab" data-target="#teamInfo" type="button"
+                        role="tab" aria-controls="teamInfo" aria-selected="false">
+                        <h4>Player Team Info</h4>
+                    </button>
+                </li>
+             
+                <li (click)="storeTab('registration')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="registration-tab" data-toggle="tab" data-target="#registration"
+                        type="button" role="tab" aria-controls="registration" aria-selected="false">
+                        <h4>Tounrnament  
+                            Reg. By Player</h4>
+                    </button>
+                </li>
+
+                <li (click)="[storeTab('account-statemnt')]" class="nav-item" role="presentation">
+                    <button class="nav-link" id="account-statemnt-tab" data-toggle="tab" data-target="#account-statemnt" type="button"
+                        role="tab" aria-controls="account-statemnt" aria-selected="false">
+                        <h4>Account Statemnt</h4>
+                    </button>
+                </li>
+                <li (click)="storeTab('playerbanking')" class="nav-item" role="presentation">
+                    <button class="nav-link" id="match-winner" data-toggle="tab" data-target="#playerbanking" type="button"
+                        role="tab" aria-controls="result" aria-selected="false">
+                        <h4>Player Banking</h4>
+                    </button>
+                </li>
+            </ul>
+
+
+            <!----------------------------Table Details -->
+            <div class="tab-content" id="myTabContent">
+
+                <!--------------------------Basic Toutnament Info ------------------------------------>
+                <div class="tab-pane fade show active p-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="col-lg-4">
+                            <ul>
+                                <h4>Basic Details</h4>
+                                <li class="d-flex justify-content-between mb-2">Name:
+                                    <span>{{this.userdata?.name}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Player Name:
+                                    <span>{{this.userdata?.username || 'N/A'}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Player Id:
+                                    <span>{{this.userdata?._id}}</span>
+                                </li>
+                             
+                                <li class="d-flex justify-content-between mb-2">
+                                    Email:<span>{{this.userdata?.email || 'N/A'}}</span>
+                                </li>
+
+                                <li class="d-flex justify-content-between mb-2">
+                                    Phone Number:<span>{{this.userdata?.phoneNumber || 'N/A'}}</span>
+                                </li>
+
+                                <li class="d-flex justify-content-between mb-2">Role:
+                                    <span>{{this.userdata?.role}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Signup Date:
+                                    <span>{{this.userdata?.createdAt | date}}</span>
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Status:
+                                    <span>{{this.userdata?.active}}</span>
+
+                                </li>
+                                <br>
+                                <h4>Wallet</h4>
+                                <li class="d-flex justify-content-between mb-2">
+                                    Bonus:<span>{{this.userdata?.wallet?.bonus || 'N/A'}}</span></li>
+                                <li class="d-flex justify-content-between mb-2">Available Coins:
+                                    <span>{{this.userdata?.wallet?.availableCoins || 'N/A'}}</span>
+
+                                </li>
+                                <li class="d-flex justify-content-between mb-2">Exposure:
+                                    <span>{{this.userdata?.wallet?.exposure || 'N/A'}}</span>
+
+                                </li>
+                                <!-- <li class="d-flex justify-content-between mb-2">TotalCoin:
+                                    <span>{{this.userdata?.wallet?.totalCoin || 'N/A'}}</span>
+
+                                </li> -->
+
+                            </ul>
+                        </div>
+                       
+                      
+                </div>
+
+
+                <!--------------------------teamInfo Info ------------------------------------>
+                <div class="tab-pane fade" id="teamInfo" role="tabpanel" aria-labelledby="teamInfo-tab">
+                    <div class="col-lg-4">
+                        <ul>
+                            <h4>Team Details</h4>
+                            <li class="d-flex justify-content-between mb-2">Team Name:
+                                <span>{{this.teamPlayertdata?.teamName}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Team Leader Name:
+                                <span>{{this.teamPlayertdata?.teamLeader || 'N/A'}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Team Id:
+                                <span>{{this.teamPlayertdata?._id}}</span>
+                            </li>
+                         
+                            <li class="d-flex justify-content-between mb-2">
+                                Email:<span>{{this.teamPlayertdata?.email || 'N/A'}}</span>
+                            </li>
+
+                            <li class="d-flex justify-content-between mb-2">
+                                Phone Number:<span>{{this.teamPlayertdata?.phoneNumber || 'N/A'}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">
+                                Whatsupno Number:<span>{{this.teamPlayertdata?.whatsupno || 'N/A'}}</span>
+                            </li>
+
+                            <li class="d-flex justify-content-between mb-2">Rating:
+                                <span>{{this.teamPlayertdata?.rating}}</span>
+                            </li>
+                         
+                            <li class="d-flex justify-content-between mb-2">Status:
+                                <span>{{this.teamPlayertdata?.active}}</span>
+
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Region:
+                                <span>{{this.teamPlayertdata?.Region}}</span>
+
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Team Image:
+                                <span>{{this.teamPlayertdata?.teamImage}}</span>
+
+                            </li>
+                            
+                            <li class="d-flex justify-content-between mb-2">Team create Date:
+                                <span>{{this.teamPlayertdata?.createdAt | date}}</span>
+                            </li>
+                            <li class="d-flex justify-content-between mb-2">Last Updated Date:
+                                <span>{{this.teamPlayertdata?.updatedAt | date}}</span>
+                            </li>
+                     
+
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="col-lg-12">
+                            <h4>List Of Team Member Added</h4>
+                            <div>
+                                <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+                                    aria-describedby="dt-basic-example_info">
+                                    <thead class="btn-primary">
+                                        <tr role="row">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Team Member Name</th>
+                                            <th scope="col">Team Discord Name</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">UID</th>
+                                            <th scope="col">ID</th>
+
+                                   
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of this.teamplayertdata?.players;let i = index">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{data?.playerName}}</td>
+                                            <td>{{data?.discordUserName}}</td>
+                                            <td>{{data?.active}}</td>
+                                            <td>{{data?.uid}}</td>
+                                            <td>{{data?._id}}</td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                                <h3 *ngIf="this.teamplayertdata?.players?.length==0 || !this.teamplayertdata?.players">No record
+                                    Found
+                                </h3>
+                            </div>
+                    </div>
+                    </div>
+               
+
+
+
+                <!--------------------------Player Registration Info ------------------------------------>
+                <div class="tab-pane fade" id="registration" role="tabpanel" aria-labelledby="registration-tab">
+                    <div class="col-lg-12">
+                            <h4>List Of Tournament</h4>
+                            <div>
+                                <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+                                    aria-describedby="dt-basic-example_info">
+                                    <thead class="btn-primary">
+                                        <tr role="row">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Tournament Name</th>
+                                            <th scope="col">Tournament GameType</th>
+                                            <th scope="col">Format</th>
+                                            <th scope="col">Start Date</th>
+                                            <th scope="col">End Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of this.tournamentRegdata;let i = index">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{data?.name}}</td>
+                                            <td>{{data?.gameType}}</td>
+                                            <td>{{data?.tournametformat}}</td>
+                                            <td>{{data?.sechduleStartdate}}</td>
+                                            <td>{{data?.sechduleEnddate}}</td>
+                                            <td>{{data?.status}}</td>
+                                            <td>{{data?._id}}</td>
+                                            <td><button class="btn btn-primary  mr-2" (click)="viewtournamentDetail(data)">View </button>
+                                              </td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                                <h3 *ngIf="this.tournamentRegdata?.length==0">No record Found
+                                </h3>
+                            </div>
+                    </div>
+                    </div>
+
+
+                <!--------------------------Accpount Statment Info ------------------------------------>
+                <div class="tab-pane fade" id="account-statemnt" role="tabpanel" aria-labelledby="account-statemnt-tab">
+                    <div class="col-lg-12">
+                            <h4>Account Statemnt</h4>
+                            <div>
+                                <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+                                    aria-describedby="dt-basic-example_info">
+                                    <thead class="btn-primary">
+                                        <tr role="row">
+                                            <th scope="col">#</th>
+                                            <th scope="col">User Name</th>
+                                            <th scope="col">Transaction Type</th>
+                                            <th scope="col">Bonus</th>
+                                            <th scope="col">Previous Coin</th>
+                                            <th scope="col">Available Coins</th>
+                                            <th scope="col">Exposure</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of this.accountStatemtndata;let i = index">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{data?.name}}</td>
+                                            <td>{{data?.transactionType}}</td>
+                                            <td>{{data?.wallet?.bonus}}</td>
+                                            <td>{{data?.wallet?.previousCoin}}</td>
+                                            <td>{{data?.wallet?.availableCoins}}</td>
+                                            <td>{{data?.wallet?.exposure}}</td>
+                                            <td>{{data?.wallet?.amount}}</td>
+                                            <td>{{data?.status}}</td>
+                                            <td>{{data?.createdAt | date}}</td>
+
+                                            <td><button class="btn btn-primary  mr-2" (click)="viewtournamentDetail(data)">View </button>
+                                              </td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                                <h3 *ngIf="this.tournamentRegdata?.length==0">No record Found
+                                </h3>
+                            </div>
+                    </div>
+                    </div>
+               
+
+                <!--------------------------Match Winner Result Info ------------------------------------>
+
+
+                <!---------------------------------Player Banking------------------->
+             
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
+
+
+<app-loader *ngIf="loader"></app-loader>

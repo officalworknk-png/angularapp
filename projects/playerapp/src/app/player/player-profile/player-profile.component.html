@@ -1,0 +1,56 @@
+<section class="contact-section section_padding">
+  <div class="container bannerRow tnamnet-navbar">
+    <div class="row">
+      <form [formGroup]="profileForm" class="form-contact contact_form" id="contactForm" novalidate="novalidate">
+        <div class="container">
+          <div class="col-md-12 p-5">
+            <form [formGroup]="profileForm">
+              <h4 class="contact-title text-black">Your Detail</h4>
+
+              <div class="mb-3">
+                <label class="form-label" for="last-name">Phone Number: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="number"
+                  [ngClass]="{ 'is-invalid': submitted && f['number'].errors }" disabled>
+                <div *ngIf="submitted && f['number'].errors" class="invalid-feedback">
+                  <div *ngIf="f['number'].errors['required']">Phone is required</div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="last-name">Email: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="email"
+                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" disabled>
+
+                <app-validation-message [control]="profileForm.controls.email" [key]="'Email'"></app-validation-message>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="last-name">User Name: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="name"
+                  [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" disabled>
+
+                <app-validation-message [control]="profileForm.controls.name" [key]="'Username'">
+                </app-validation-message>
+              </div>
+
+              <div class="mb-3" *ngIf="!this.userId">
+                <label class="form-label" for="last-name">Password: </label>
+                <input class="form-control" type="password" formControlName="password"
+                  [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                <app-validation-message [control]="profileForm.controls.password" [key]="'Password'">
+                </app-validation-message>
+              </div>
+              <div class="form-group mt-3">
+                <button type="submit" (click)="updateSubmit()" class="button-contactForm btn_1">Change Password
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>

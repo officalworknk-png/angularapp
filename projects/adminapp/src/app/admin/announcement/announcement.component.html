@@ -1,0 +1,99 @@
+<main id="js-page-content" role="main" class="page-content pb-0">
+    <h2 class="titleText">{{'Announcement' | titlecase}}</h2>
+    <div class="row">
+      <div class="col-xl-12">
+  
+        <button class="btn btn-primary mb-2" (click)="addannouncement()">Add Announcement</button>
+        <table class="table table-sm w-100 inMobile inDesktopMd dataTable" role="grid"
+          aria-describedby="dt-basic-example_info">
+          <thead class="btn-primary">
+            <tr role="row">
+              <th scope="col">#</th>
+              <th scope="col">Announcement</th>
+              <th scope="col">Index</th>
+              <th scope="col">Status</th>
+              <th scope="col">Update</th>
+              <th scope="col" *ngIf="this.object.isOwner">Delete</th>
+  
+  
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of this.getannounceList;let i=index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{data?.announcement}}</td>
+              <td>{{data?.idx}}</td>
+              <td>{{data?.status}}</td>
+           
+              <td><button class="btn btn-primary col-sm-10  me-2" (click)="updateannouncementdata(data)">Update </button></td>
+              <td *ngIf="this.object.isOwner"><button class="btn btn-primary col-sm-10  me-2"
+                  (click)="deletebonus(data)">delete </button></td>
+  
+            </tr>
+          </tbody>
+          <h3  *ngIf="this.bonusdata?.length ==0">No record Found</h3>
+        </table>
+      </div>
+    </div>
+  </main>
+  
+  
+  <!-------------ADD/Update bonus------------------>
+  <div class="modal fade" id="add-announcement" tabindex="-1">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="!this.selectedannouncement" class="modal-title">Announcement</h5>
+          <h5 *ngIf="this.selectedannouncement" class="modal-title">Update Announcement</h5>
+  
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+          </button>
+        </div>
+  
+  
+        <div class="container">
+          <form [formGroup]="announcementForm">
+            <div class="row ">
+  
+              <div class="col-12 mb-12 m-2">
+                <label class="form-label" for="last-name">Announcement: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="announcement"
+                  [ngClass]="{ 'is-invalid': submitted && f['announcement'].errors }">
+  
+                <app-validation-message [control]="announcementForm.controls.announcement" [key]="'announcement'">
+                </app-validation-message>
+              </div>
+              <div class="col-12 mb-12 m-2">
+                <label class="form-label" for="last-name">Announcement Index: </label>
+                <input class="form-control" id="last-name" type="text" formControlName="idx"
+                  [ngClass]="{ 'is-invalid': submitted && f['idx'].errors }">
+  
+                <app-validation-message [control]="announcementForm.controls.idx" [key]="'idx'">
+                </app-validation-message>
+              </div>
+
+  
+              <div class="col-12 mb-12 m-2">
+                <label class="form-label" for="last-name">Status: </label>
+                <select class="form-select" formControlName="status">
+                    <option value="INACTIVE" selected>INACTIVE</option>
+                    <option value="ACTIVE">ACTIVE </option>
+                </select>
+            </div>
+  
+              <div class="col-12 mb-12 m-2">
+              <button *ngIf="!this.selectedannouncement" (click)="onSubmitAnnouncemnt()" class="btn btn-primary"
+                type="submit">Submit</button>
+              <button *ngIf="this.selectedannouncement" (click)="updateSubmit()" class="btn btn-primary"
+                type="submit">Update</button>
+              </div>
+            </div>
+          </form>
+  
+        </div>
+  
+  
+      </div>
+    </div>
+  </div>

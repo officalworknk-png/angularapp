@@ -1,0 +1,48 @@
+<section class="gallery_part section_padding">
+    <div class="container bannerRow">
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <!-- <h2>Live Tournament</h2> -->
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class=" text-center">
+                        <h2>Live Tournament</h2>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-sm-5 col-md-4 blog_post" *ngFor="let item of tournamentdata">
+                <div class="trnamentImg">
+                    <img src="assets/img/{{item.gameType}}.jpg" alt="random image">
+                </div>
+                <div class="row container_copy">
+                    <!-- justify-content-end -->
+                    <div class="">
+                        <ul>
+                            <li class="trnmenttitle">Tournament: <span class="trnmentname">{{item?.name}}</span></li>
+                            <li class="trnmenttitle">Entry Charges:
+                                <span class="trnmentname" *ngIf="item?.entrycharges ==0"> Free</span>
+                                <span class="trnmentname" *ngIf="item?.entrycharges > 0"> &#8377; {{item?.entrycharges}}</span>
+                               </li>
+                            
+                            <li class="trnmenttitle">Prize:<span class="trnmentname">{{item?.prize}}</span></li>
+                            <li class="trnmenttitle">End Date:<span class="trnmentname">{{item?.sechduleEnddate | date}}</span></li>
+                           
+                            <li class="trnmenttitle d-flex justify-content-between align-items-center"><span>Max
+                                    {{item?.participantType}}:<span
+                                        class="trnmentname">{{item?.maxParticipentTeam}}</span> </span> <a
+                                    class="btn_primary   justify-content-end " (click)="viewTournamet(item)">Join
+                                    Now</a></li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
