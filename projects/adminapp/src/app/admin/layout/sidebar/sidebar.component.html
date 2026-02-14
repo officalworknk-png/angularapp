@@ -7,7 +7,7 @@
         </a>
     </div>
     <div class="page-logo">
-        <a [routerLink]="[this.object.getUI_URL().admin.accountProfile]"
+        <a
             class="page-logo-link press-scale-down d-flex align-items-center justify-content-center position-relative">
             <img src="assets/images/PHONEPe.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
 
@@ -73,9 +73,9 @@
 
 
 
-
+<!-- [routerLink]="[this.object.getUI_URL().admin.affiliatePayoutHistory]" -->
             <li class="" routerLinkActive="active" [class.open]="rlaAfPh?.isActive" #rlaAfPh="routerLinkActive">
-                <a routerLinkActive="active" [routerLink]="[this.object.getUI_URL().admin.affiliatePayoutHistory]"
+                <a routerLinkActive="active" 
                     aria-expanded="false" data-filter-tags="application intel" class="waves-effect waves-themed">
                     <i class="fal fa-money-bill-alt"></i>
                     <span class="nav-link-text" data-i18n="nav.application_intel">{{'Payout History' |

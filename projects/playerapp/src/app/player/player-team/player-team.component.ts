@@ -13,6 +13,8 @@ export class PlayerTeamComponent implements OnInit {
   playerlist: FormArray;
   teamUsertdata:any=[]
   userDetail: any;
+submitted = false;
+
   constructor(private fb: FormBuilder, public object: MainObjectService, public routeParam: ActivatedRoute,public router: Router) {
   }
 

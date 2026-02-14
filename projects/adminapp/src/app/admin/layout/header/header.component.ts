@@ -9,6 +9,7 @@ declare var $:any
 })
 export class HeaderComponent implements OnInit {
   sidemenudata: boolean=true;
+  isExcelEnabled=true
 
   constructor(private router:Router,public object:MainObjectService) { }
 
@@ -18,7 +19,15 @@ export class HeaderComponent implements OnInit {
   }
 
 
+getExportDownload(){
 
+}
+getPdfDownload(){
+
+}
+showCreateAdmin(){
+
+}
  
 
   logout(){

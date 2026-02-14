@@ -12,6 +12,7 @@ import { MainObjectService } from 'core/services/master-object.service';
 export class TournamentDashboardComponent implements OnInit {
   tournamentdata: any;
   selectedTournamntData: any
+  submitted=false
   constructor(private fb: FormBuilder, public object: MainObjectService, public routeParam: ActivatedRoute,public router: Router) {
     this.object.activelink="TOURNAMENT_MGMT"
 
@@ -23,6 +24,9 @@ export class TournamentDashboardComponent implements OnInit {
     this.gettournamentdata()
 
   }
+
+
+
 
   gettournamentdata() {
     var url: any
@@ -55,6 +59,10 @@ export class TournamentDashboardComponent implements OnInit {
     this.selectedTournamntData = null
     console.log(this.selectedTournamntData)
     this.object.getDOMInstance().showModal(this.object.getDOMInstance().modal.addtournament)
+  }
+   get f() {
+    return this.tournamentForm.controls;   // ✅ add this
+
   }
 
   tournamentForm: FormGroup = new FormGroup({
@@ -159,7 +167,7 @@ export class TournamentDashboardComponent implements OnInit {
 
 
 
-  updatetounament(userId) {
+  updatetounament() {
 
     if (this.tournamentForm.invalid) {
       return;

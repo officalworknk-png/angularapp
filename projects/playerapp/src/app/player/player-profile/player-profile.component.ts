@@ -9,7 +9,8 @@ import { MainObjectService } from 'core/services/master-object.service';
   styleUrls: ['./player-profile.component.scss']
 })
 export class PlayerProfileComponent implements OnInit {
-
+submitted = false;
+  userId:boolean=false
   constructor(public object: MainObjectService, public router: Router,private fb: FormBuilder) { }
 
 

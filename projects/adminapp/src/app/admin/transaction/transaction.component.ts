@@ -13,6 +13,7 @@ export class TransactionComponent implements OnInit {
   getUserData: any;
   status: string = 'COMPLETED';  // Default value
   remark: string = '';          // Default empty remark
+  selectedBonus=true
  constructor(public object: MainObjectService, public router: Router,private fb: FormBuilder) { 
     this.object.activelink="BONUS"
 

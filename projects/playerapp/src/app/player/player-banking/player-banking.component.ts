@@ -10,6 +10,7 @@ import { MainObjectService } from 'core/services/master-object.service';
   styleUrls: ['./player-banking.component.scss']
 })
 export class PlayerBankingComponent implements OnInit {
+submitted = false;
 
    constructor(public object: MainObjectService, public router: Router,private fb: FormBuilder) { }
   
@@ -32,6 +33,9 @@ export class PlayerBankingComponent implements OnInit {
      this.transactionForm()
     } 
 
+    get f() {
+  return this.depositForm.controls;
+}
     transactionForm() {
       this.depositForm = this.fb.group(
         {
@@ -89,6 +93,11 @@ export class PlayerBankingComponent implements OnInit {
   
       })
     }
+
+      storeTab(data){
+    console.log("==>",data)
+ 
+  }
   
   }
   

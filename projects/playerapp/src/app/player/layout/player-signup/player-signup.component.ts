@@ -11,7 +11,8 @@ import { MainObjectService } from 'core/services/master-object.service';
   styleUrls: ['./player-signup.component.scss']
 })
 export class PlayerSignupComponent implements OnInit {
-
+submitted = false;
+userId: any;
   constructor(private fb: FormBuilder, public object: MainObjectService, public routeParam: ActivatedRoute,public router: Router) {
   }
 

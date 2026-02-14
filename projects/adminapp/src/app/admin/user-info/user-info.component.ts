@@ -11,7 +11,7 @@ import { MainObjectService } from 'core/services/master-object.service';
 export class UserInfoComponent implements OnInit {
   userId: any;
   userdata: any;
-  teamplayertdata: any;
+  teamPlayertdata: any;
   tournamentRegdata: any;
   accountStatemtndata: any;
   constructor(private fb: FormBuilder, public object: MainObjectService, public routeParam: ActivatedRoute, public router: Router) {
@@ -81,8 +81,8 @@ export class UserInfoComponent implements OnInit {
     url = this.object.getURLInstance().adminusergetregisterTeam+ "/" +this.userId
 
   this.object.get(url, this.userId).subscribe((res: any) => {
-    this.teamplayertdata = res.data[0]
-    console.log("Team detail ---->", this.teamplayertdata)
+    this.teamPlayertdata = res.data[0]
+    console.log("Team detail ---->", this.teamPlayertdata)
   }, error => {
 
     this.object.setError(error)
@@ -117,6 +117,10 @@ export class UserInfoComponent implements OnInit {
     this.object.setError(error)
 
   })
+  }
+
+  viewtournamentDetail(data){
+    
   }
 
 }

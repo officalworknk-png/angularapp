@@ -54,6 +54,9 @@ export class UpdateTournamentComponent implements OnInit {
 
   }
 
+   get f() {
+    return this.matchForm.controls;   // ✅ add this
+  }
   //*************************TOURNAMENT*********************************************/
 
   gettournamentdata() {
